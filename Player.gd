@@ -2,41 +2,54 @@ extends KinematicBody2D
 
 const UP_DIRECTION := Vector2.DOWN
 
-export var speed := 600.0
-export var jump_strength := 1500.0
-export var maximum_jumps := 3
-export var double_jump_strength := 1200.0
-export var gravity := 4500.0
+export var speed := 20.0
+export var waterResistance := 20.0
+export var jump_gravity := 500.0
+export var fall_gravity := 1000.0
+export var max_jump := 25.0
 
-var jumps_made := 0
+var jumps_made := 0.0
 var velocity := Vector2.ZERO # Geschwindigkeit
+var jump_height := 0.0
+var is_jumping := false
+var last_vel := Vector2.ZERO
 
-#onready var pivot: Node2D = $ColorRect
-#onready var start_scale: Vector2 = pivot.scale
 
 func _physics_process(delta: float) -> void:
-	var horizonzal_direction = (Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))
-	velocity.x = horizonzal_direction * speed
-	velocity.y = velocity.y - gravity * delta
+	reduce_vel(delta)
+
+	if Input.is_action_pressed("jump"):
+		print(jump_height)
+		if jump_height < max_jump:
+			jump_height += 1
+		Engine.time_scale = 0.01
 	
-	var is_falling := velocity.y < 0.0 and not is_on_ceiling()
-	var is_jumping := Input.is_action_just_pressed("jump") and is_on_ceiling()
-	var is_double_jumping := Input.is_action_just_pressed("jump") and is_falling
-	var is_jump_cancelled := Input.is_action_just_pressed("jump") and velocity.y < 0.0
-	var is_idling := is_on_ceiling() and is_zero_approx(velocity.x)
-	var is_running := is_on_ceiling() and not is_zero_approx(velocity.x)
-	
-	if is_jumping:
-		jumps_made += 1
-		velocity.y = +jump_strength
-	elif is_double_jumping:
-		jumps_made += 1
-		if jumps_made <= maximum_jumps:
-			velocity.y = +double_jump_strength
-	elif is_jump_cancelled:
-		velocity.y = 0.0
-	elif is_idling or is_running:
-		jumps_made = 0
-	
+	if Input.is_action_just_released("jump"):
+		Engine.time_scale = 1
+		do_jump()
+	print(velocity)
+	last_vel = velocity
 	velocity = move_and_slide(velocity, UP_DIRECTION)
 
+func do_jump():
+	var dir = position.direction_to(get_viewport().get_mouse_position())
+	velocity = dir*jump_height*speed
+	jump_height = 0
+	is_jumping = true
+	
+
+func get_gravity():
+	return jump_gravity if velocity.y < 0.0 else fall_gravity
+
+func reduce_vel(delta):
+	velocity.y = velocity.y - get_gravity() * delta # do gravity always
+	if is_on_floor():
+		velocity.x = 0
+		is_jumping = false
+	elif is_on_wall():
+		velocity.x = -last_vel.x * 0.85
+	else:
+		if velocity.x > 0:
+			velocity.x = velocity.x - waterResistance * delta
+		elif velocity.x < 0:
+			velocity.x = velocity.x + waterResistance * delta
