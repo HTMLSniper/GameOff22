@@ -8,7 +8,8 @@ export var jump_gravity := 500.0
 export var fall_gravity := 1000.0
 export var max_jump := 25.0
 
-var jumps_made := 0.0
+var jumps_made := 0
+var max_jumps := 2
 var velocity := Vector2.ZERO # Geschwindigkeit
 var jump_height := 0.0
 var is_jumping := false
@@ -21,17 +22,20 @@ onready var trajPoint = $TrajPoint
 
 func _physics_process(delta: float) -> void:
 	velocity = reduce_vel(delta, velocity)
-
-	if Input.is_action_pressed("jump"):
-		update_trajectory(delta)
-		if jump_height < max_jump:
-			jump_height += 1
-		Engine.time_scale = 0.01
 	
-	if Input.is_action_just_released("jump"):
-		line.clear_points()
-		Engine.time_scale = 1
-		do_jump()
+	if jumps_made < max_jumps:
+		if Input.is_action_pressed("jump"):
+			
+			if jump_height < max_jump:
+				jump_height += 1
+			Engine.time_scale = 0.09
+		else:
+			update_trajectory(delta)
+		if Input.is_action_just_released("jump"):
+			Engine.time_scale = 1
+			line.clear_points()
+			jumps_made += 1
+			do_jump()
 	last_vel = velocity
 	velocity = move_and_slide(velocity, UP_DIRECTION)
 
@@ -57,6 +61,7 @@ func reduce_vel(delta, vel):
 	if is_on_floor():
 		vel.x = 0
 		is_jumping = false
+		jumps_made = 0
 	elif is_on_wall():
 		vel.x = -last_vel.x * 0.85
 	else:

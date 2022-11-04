@@ -8,7 +8,7 @@
 
 [sub_resource type="ParticlesMaterial" id=7]
 emission_shape = 2
-emission_box_extents = Vector3( 110, 10, 1 )
+emission_box_extents = Vector3( 270, 10, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, -8, 0 )
 orbit_velocity = 0.0
@@ -19,38 +19,38 @@ color = Color( 1, 1, 1, 0.180392 )
 anim_speed_random = 0.73
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 120, 8 )
+extents = Vector2( 318, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 120, 8 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 90, 20 )
+extents = Vector2( 697.25, 20 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 3 )
 shader_param/blue_tint = Color( 0, 0.784314, 1, 1 )
 shader_param/color_mix = 0.2
-shader_param/sprite_scale = Vector2( 5, 2.813 )
+shader_param/sprite_scale = Vector2( 9.922, 11.891 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 26, 7.5 )
 
 [node name="World" type="Node2D"]
 __meta__ = {
-"_edit_vertical_guides_": [ 280.0, 40.0 ]
+"_edit_vertical_guides_": [ 600.0, 40.0 ]
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = 33.0
-margin_top = -3.00001
-margin_right = 213.0
-margin_bottom = 238.0
-rect_scale = Vector2( 1.4, 1.4 )
+margin_top = -3.0
+margin_right = 442.0
+margin_bottom = 305.0
+rect_scale = Vector2( 3.2, 3.2 )
 texture = ExtResource( 4 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 158, 198 )
+position = Vector2( 310, 399 )
 amount = 50
 lifetime = 5.0
 randomness = 0.47
@@ -58,18 +58,20 @@ process_material = SubResource( 7 )
 texture = ExtResource( 5 )
 
 [node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2( 160, -16 )
+position = Vector2( 320, -9 )
 
 [node name="ColorRect" type="ColorRect" parent="Ground"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -120.0
-margin_right = 120.0
-margin_bottom = 16.0
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -8.0
+margin_right = 320.0
+margin_bottom = 8.0
 color = Color( 0.113725, 0.113725, 0.113725, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2( 0, 8 )
 shape = SubResource( 1 )
 
 [node name="Ground2" type="StaticBody2D" parent="."]
@@ -96,32 +98,33 @@ rotation = 1.5708
 [node name="ColorRect" type="ColorRect" parent="Ground3"]
 margin_left = -90.0
 margin_top = -22.0
-margin_right = 90.0
+margin_right = 1350.0
 margin_bottom = 18.0
 color = Color( 0.113725, 0.113725, 0.113725, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground3"]
-position = Vector2( 0, -2 )
+position = Vector2( 580.5, -2.00098 )
 shape = SubResource( 3 )
 
 [node name="Ground4" type="StaticBody2D" parent="."]
-position = Vector2( 276, 90 )
+position = Vector2( 597, 90 )
 rotation = 1.5708
 
 [node name="ColorRect" type="ColorRect" parent="Ground4"]
 margin_left = -90.0
 margin_top = -44.0
-margin_right = 90.0
+margin_right = 1350.0
 margin_bottom = -4.0
 color = Color( 0.113725, 0.113725, 0.113725, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground4"]
-position = Vector2( 0, -24 )
+position = Vector2( 578.75, -24.001 )
 shape = SubResource( 3 )
 
 [node name="Water" type="Sprite" parent="."]
 material = SubResource( 6 )
-scale = Vector2( 5, 2.8125 )
+position = Vector2( -7.62939e-06, -2.99998 )
+scale = Vector2( 9.92188, 11.8906 )
 texture = ExtResource( 2 )
 centered = false
 
