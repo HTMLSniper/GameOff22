@@ -18,7 +18,7 @@ var max_points := 5
 
 onready var line = $DirectionVisualizer
 onready var trajPoint = $TrajPoint
-onready var cam = $CamTransition
+onready var cam = $TransitionCam
 
 
 func _physics_process(delta: float) -> void:
@@ -63,7 +63,12 @@ func update_trajectory(delta):
 	
 
 func get_gravity(vel):
-	return jump_gravity if vel.y < 0.0 else fall_gravity
+	if vel.y < 0.0:
+		cam.smoothing_speed = 1
+		return jump_gravity 
+	else:
+		
+		return fall_gravity
 
 func reduce_vel(delta, vel):
 	vel.y = vel.y - get_gravity(vel) * delta # do gravity always
