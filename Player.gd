@@ -18,14 +18,16 @@ var max_points := 5
 
 onready var line = $DirectionVisualizer
 onready var trajPoint = $TrajPoint
+onready var cam = $CamTransition
 
 
 func _physics_process(delta: float) -> void:
 	velocity = reduce_vel(delta, velocity)
+	update_cam()
 	
 	if jumps_made < max_jumps:
 		if Input.is_action_pressed("jump"):
-			
+			update_trajectory(delta)
 			if jump_height < max_jump:
 				jump_height += 1
 			Engine.time_scale = 0.09
@@ -40,15 +42,22 @@ func _physics_process(delta: float) -> void:
 	velocity = move_and_slide(velocity, UP_DIRECTION)
 
 func do_jump():
-	var dir = position.direction_to(get_viewport().get_mouse_position())
+	var dir = position.direction_to(get_global_mouse_position())
 	velocity = dir*jump_height*speed
 	jump_height = 0
 	is_jumping = true
 
+func update_cam():
+	# floor ceil ? to 0 and 360 -> 360 and 720
+	#cam.limit_top = floor(position.y/360)*360
+	#cam.limit_bottom =  ceil(position.y + 7/367)*360
+	pass
+
+
 func update_trajectory(delta):
 	line.clear_points()
 	var start_pos = Vector2(trajPoint.position.x,trajPoint.position.y-8)
-	var end_pos = Vector2(transform.xform_inv(get_viewport().get_mouse_position()).x, transform.xform_inv(get_viewport().get_mouse_position()).y - 8)
+	var end_pos = Vector2(transform.xform_inv(get_global_mouse_position()).x, transform.xform_inv(get_global_mouse_position()).y - 8)
 	line.add_point(start_pos)
 	line.add_point(end_pos)
 	
@@ -63,7 +72,7 @@ func reduce_vel(delta, vel):
 		is_jumping = false
 		jumps_made = 0
 	elif is_on_wall():
-		vel.x = -last_vel.x * 0.85
+		vel.x = -last_vel.x * 0.75
 	else:
 		if vel.x > 0:
 			vel.x = vel.x - waterResistance * delta

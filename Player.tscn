@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player_v1.png" type="Texture" id=2]
 [ext_resource path="res://assets/line.png" type="Texture" id=3]
+[ext_resource path="res://assets/water11.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 7 )
@@ -25,3 +26,24 @@ texture_mode = 1
 
 [node name="TrajPoint" type="Position2D" parent="."]
 position = Vector2( 0, 8 )
+
+[node name="CamTransition" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 640
+smoothing_enabled = true
+smoothing_speed = 1.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 0.1 )
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_left = -295.0
+margin_top = -220.0
+margin_right = -115.0
+margin_bottom = 88.0
+rect_scale = Vector2( 3.2, 3.2 )
+texture = ExtResource( 4 )
