@@ -6,7 +6,8 @@ export var speed := 20.0
 export var waterResistance := 20.0
 export var jump_gravity := 500.0
 export var fall_gravity := 1000.0
-export var max_jump := 25.0
+export var max_jump := 17.0
+# TODO back to 25? oder sprite indicator richtig
 
 var jumps_made := 0
 var max_jumps := 2
@@ -19,6 +20,7 @@ var max_points := 5
 onready var line = $DirectionVisualizer
 onready var trajPoint = $TrajPoint
 onready var cam = $TransitionCam
+onready var indicator = $JumpIndicator
 
 
 func _physics_process(delta: float) -> void:
@@ -29,10 +31,13 @@ func _physics_process(delta: float) -> void:
 			update_trajectory(delta)
 			if jump_height < max_jump:
 				jump_height += 1
+				indicator.frame = jump_height - 1
 			Engine.time_scale = 0.09
 		else:
-			update_trajectory(delta)
+			indicator.frame = 0
+			#update_trajectory(delta)
 		if Input.is_action_just_released("jump"):
+			
 			Engine.time_scale = 1
 			line.clear_points()
 			jumps_made += 1
@@ -49,11 +54,15 @@ func do_jump():
 
 
 func update_trajectory(delta):
-	line.clear_points()
-	var start_pos = Vector2(trajPoint.position.x,trajPoint.position.y-8)
-	var end_pos = Vector2(transform.xform_inv(get_global_mouse_position()).x, transform.xform_inv(get_global_mouse_position()).y - 8)
-	line.add_point(start_pos)
-	line.add_point(end_pos)
+	indicator.rotation = get_global_mouse_position().angle_to_point(position) - 1.5707963268
+	print(indicator.rotation)
+	print(position)
+	print(get_global_mouse_position())
+#	line.clear_points()
+#	var start_pos = Vector2(trajPoint.position.x,trajPoint.position.y-8)
+#	var end_pos = Vector2(transform.xform_inv(get_global_mouse_position()).x, transform.xform_inv(get_global_mouse_position()).y - 8)
+#	line.add_point(start_pos)
+#	line.add_point(end_pos)
 	
 
 func get_gravity(vel):
