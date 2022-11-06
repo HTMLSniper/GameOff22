@@ -23,7 +23,6 @@ onready var cam = $TransitionCam
 
 func _physics_process(delta: float) -> void:
 	velocity = reduce_vel(delta, velocity)
-	update_cam()
 	
 	if jumps_made < max_jumps:
 		if Input.is_action_pressed("jump"):
@@ -47,11 +46,6 @@ func do_jump():
 	jump_height = 0
 	is_jumping = true
 
-func update_cam():
-	# floor ceil ? to 0 and 360 -> 360 and 720
-	#cam.limit_top = floor(position.y/360)*360
-	#cam.limit_bottom =  ceil(position.y + 7/367)*360
-	pass
 
 
 func update_trajectory(delta):
@@ -64,10 +58,8 @@ func update_trajectory(delta):
 
 func get_gravity(vel):
 	if vel.y < 0.0:
-		cam.smoothing_speed = 1
 		return jump_gravity 
 	else:
-		
 		return fall_gravity
 
 func reduce_vel(delta, vel):
