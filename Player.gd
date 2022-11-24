@@ -29,6 +29,7 @@ enum{
 	IDLE,
 	JUMPING,
 	FALLING,
+	FLYING,
 	DASHING,
 	LYING
 }
@@ -60,55 +61,36 @@ func _physics_process(delta: float) -> void:
 			jumping_state(delta)
 		FALLING:
 			falling_state(delta)
+		FLYING:
+			flying_state(delta)
 		DASHING:
 			dashing_state(delta)
 		LYING:
 			lying_state(delta)
-	
-	if lying:
-		Engine.time_scale = 1
-		sprite.frame = 8
-		animation.play("Lying")
-		return
-	velocity = reduce_vel(delta, velocity)
-	turn_spotlight()
-	if dash.is_dashing():
-		animation.play("Dashing_right")
-		speed = dash_speed
-	if dash.get_stopped():
-		var new_vel = Vector2.ZERO
-		new_vel.x = velocity.x/2
-		new_vel.y = velocity.y/4
-		velocity = reduce_vel(delta,new_vel)
-	if position.y < dash_start_point.y - 20:
-		dash_start_point = Vector2.ZERO
-		falling = true
-	if position.x < get_global_mouse_position().x and not falling and not dash.is_dashing():
+
+func idle_state(delta):
+	sprite.rotation = 0
+	indicator.frame = 0
+	if position.x < get_global_mouse_position().x:
 		animation.play("Idle_Right")
 		left = false
 		jumpLoad.frame = 0
-	elif falling:
-		animation.play("Falling")
-	elif dash.is_dashing():
-		animation.play("Dashing_right")
 	else:
 		animation.play("Idle_Left")
 		left = true
 		jumpLoad.frame = 4
-	if jumps_made < max_jumps and not lying:
-		if Input.is_action_pressed("jump"):
-			if left:
-				sprite.frame = 6
-			else:
-				sprite.frame = 2
-			update_trajectory(delta)
-			if jump_height < max_jump:
-				jump_height += 1
-				indicator.frame = jump_height - 1
-			Engine.time_scale = 0.09
-		else:
-			indicator.frame = 0
-			#update_trajectory(delta)
+	if Input.is_action_pressed("jump"):
+		state = JUMPING
+	velocity = reduce_vel(delta, velocity)
+	turn_spotlight()
+	last_vel = velocity
+	velocity = move_and_slide(velocity, UP_DIRECTION)
+	
+func jumping_state(delta):
+	sprite.rotation = 0
+	velocity = reduce_vel(delta, velocity)
+	turn_spotlight()
+	if jumps_made < max_jumps:
 		if Input.is_action_just_released("jump"):
 			Engine.time_scale = 1
 			line.clear_points()
@@ -117,25 +99,86 @@ func _physics_process(delta: float) -> void:
 			dash.start_dash(sprite,dash_length)
 			do_jump()
 			Shake.shake()
+			state = DASHING
+			indicator.frame = 0
+			return
 			
-			
+		if left:
+			sprite.frame = 6
+		else:
+			sprite.frame = 2
+		update_trajectory(delta)
+		if jump_height < max_jump:
+			jump_height += 1
+			indicator.frame = jump_height - 1
+		Engine.time_scale = 0.09
+	last_vel = velocity
+	velocity = move_and_slide(velocity, UP_DIRECTION)
+	
+func falling_state(delta):
+	velocity = reduce_vel(delta, velocity)
+	turn_spotlight()
+	spotlight.enabled = false
+	animation.play("Falling")
+	
+	if Input.is_action_pressed("jump") and jumps_made < max_jumps:
+		state = JUMPING
+	
 	last_vel = velocity
 	velocity = move_and_slide(velocity, UP_DIRECTION)
 
-func idle_state(delta):
-	pass
+func flying_state(delta):
+	velocity = reduce_vel(delta, velocity)
+	turn_spotlight()
+	if position.x < get_global_mouse_position().x:
+		animation.play("Idle_Right")
+		left = false
+		jumpLoad.frame = 0
+	else:
+		animation.play("Idle_Left")
+		left = true
+		jumpLoad.frame = 4
+	if Input.is_action_pressed("jump") and jumps_made < max_jumps:
+		state = JUMPING
+	if position.y < dash_start_point.y - 20:
+		dash_start_point = Vector2.ZERO
+		falling = true
+		state = FALLING
 	
-func jumping_state(delta):
-	pass
-	
-func falling_state(delta):
-	pass
+
+	last_vel = velocity
+	velocity = move_and_slide(velocity, UP_DIRECTION)
 	
 func dashing_state(delta):
-	pass
+	velocity = reduce_vel(delta, velocity)
+	turn_spotlight()
+	if dash.is_dashing():
+		if left:
+			animation.play("Dashing_left")
+		else:
+			animation.play("Dashing_right")
+		speed = dash_speed
+	if dash.get_stopped():
+		var new_vel = Vector2.ZERO
+		new_vel.x = velocity.x/2
+		new_vel.y = velocity.y/4
+		velocity = reduce_vel(delta,new_vel)
+		state = FLYING
+	last_vel = velocity
+	velocity = move_and_slide(velocity, UP_DIRECTION)
 	
 func lying_state(delta):
-	pass
+	spotlight.enabled = false
+	sprite.rotation = 0
+	if lying:
+		Engine.time_scale = 1
+		sprite.frame = 8
+		animation.play("Lying")
+	else:
+		state = IDLE
+	velocity = reduce_vel(delta, velocity)
+	last_vel = velocity
+	velocity = move_and_slide(velocity, UP_DIRECTION)
 
 func do_jump():
 	var dir = position.direction_to(get_global_mouse_position())
@@ -144,6 +187,7 @@ func do_jump():
 	is_jumping = true
 
 func turn_spotlight():
+	spotlight.enabled = true
 	spotlight.rotation = get_global_mouse_position().angle_to_point(position) - 1.5707963268
 
 func update_trajectory(delta):
@@ -151,6 +195,23 @@ func update_trajectory(delta):
 
 func get_stats():
 	return sprite.material.get_shader_param("Amount")
+
+func get_state():
+	var val = ""
+	match state:
+		IDLE:
+			val = "IDLE"
+		JUMPING:
+			val = "JUMPING"
+		FALLING:
+			val = "FALLING"
+		FLYING:
+			val = "FLYING"
+		DASHING:
+			val = "DASHING"
+		LYING:
+			val = "LYING"
+	return val
 
 func get_gravity(vel):
 	if vel.y < 0.0:
@@ -161,14 +222,19 @@ func get_gravity(vel):
 func reduce_vel(delta, vel):
 	vel.y = vel.y - get_gravity(vel) * delta # do gravity always
 	if is_on_floor():
-		if falling:
-			falling = false
-			lying = true
+		if state == FALLING:
+			vel.x = 0
+			is_jumping = false
+			jumps_made = 0
+			state = LYING
 			sprite.rotation = 0
+			lying = true
 			$LyingTimer.start()
-		vel.x = 0
-		is_jumping = false
-		jumps_made = 0
+		elif state == FLYING:
+			vel.x = 0
+			is_jumping = false
+			jumps_made = 0
+			state = IDLE
 	elif is_on_wall():
 		vel.x = -last_vel.x * 0.75
 	else:
