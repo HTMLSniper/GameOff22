@@ -17,4 +17,7 @@ func _process(delta: float) -> void:
 	if hours < 0:
 		hours = 24 + hours
 	var time_passed = "%02d:%02d:%02d" % [hours,mins,secs]
+	Global.timeh = hours
+	Global.timem = mins
+	Global.times = secs
 	text = time_passed

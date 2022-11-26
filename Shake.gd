@@ -16,16 +16,16 @@ func _ready() -> void:
 	noise.period = 20
 	noise.persistence = 0.8
 
-func shake():
-	camera_shake_intensity = camera_shake_intensity_first
-	camera_shake_duration = camera_shake_duration_first
+func shake(intensity, duration):
+	camera_shake_intensity = intensity
+	camera_shake_duration = duration
 	shake = true
 
 func set_cam():
 	camera = get_tree().current_scene.get_node("Player/Camera2D")
 	
 func _process(delta: float) -> void:
-	if shake:
+	if shake and camera:
 		if camera_shake_duration <= 0:
 			camera.offset = Vector2.ZERO
 			camera_shake_intensity = 0.0
@@ -40,3 +40,5 @@ func _process(delta: float) -> void:
 		offset = Vector2(noise_value_x, noise_value_y) * camera_shake_intensity * 2.0
 		if camera:
 			camera.offset = offset
+	else:
+		shake = false
