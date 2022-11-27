@@ -12,7 +12,7 @@ export var lightintensity_circle = 0.5
 # TODO back to 25? oder sprite indicator richtig
 
 var jumps_made := 0
-var max_jumps := 200
+var max_jumps := 2
 var velocity := Vector2.ZERO # Geschwindigkeit
 var jump_height := 0.0
 var is_jumping := false
@@ -280,6 +280,7 @@ func reduce_vel(delta, vel):
 			#backpackTimer.start()
 	elif is_on_wall():
 		vel.x = -last_vel.x * 0.75
+		vel.y *= 1.1
 		if vel.x < last_vel.x:
 			# bounce left wall
 			landingPart.position = Vector2(8,0)
