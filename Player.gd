@@ -24,6 +24,7 @@ var dash_length = .15
 var falling = false
 var lying = false
 var dash_start_point = Vector2.ZERO
+var message = true
 
 enum{
 	IDLE,
@@ -44,7 +45,7 @@ onready var trajPoint = $TrajPoint
 onready var cam = $TransitionCam
 onready var indicator = $JumpIndicator
 onready var animation = $AnimationPlayer
-onready var animation_back = $AnimationPlayerBack
+onready var backpackTimer = $TimerBackpack 
 onready var jumpLoad = $Sprite/JumpLoad
 onready var sprite = $Sprite
 onready var spotlight = $Spotlight
@@ -60,6 +61,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	handle_Backpack()
 	match state:
 		IDLE:
 			idle_state(delta)
@@ -75,18 +77,21 @@ func _physics_process(delta: float) -> void:
 			lying_state(delta)
 
 func idle_state(delta):
+	#if backpackTimer.is_stopped():
+		#if jumpLoad.frame != 8 and jumpLoad.frame != 4:
+			#backpackTimer.start()
+			#pass
+		#else:
+			#handle_Backpack()
 	if add_debug_movement(delta):
 		return
 	sprite.rotation = 0
 	indicator.frame = 0
-	if position.x < get_global_mouse_position().x:
-		animation.play("Idle_Right")
-		left = false
-		jumpLoad.frame = 0
-	else:
+	update_left()
+	if left:
 		animation.play("Idle_Left")
-		left = true
-		jumpLoad.frame = 4
+	else:
+		animation.play("Idle_Right")
 	if Input.is_action_pressed("jump"):
 		state = JUMPING
 	velocity = reduce_vel(delta, velocity)
@@ -95,6 +100,13 @@ func idle_state(delta):
 	velocity = move_and_slide(velocity, UP_DIRECTION, false)
 	
 func jumping_state(delta):
+	if position.y < dash_start_point.y - 20:
+		dash_start_point = Vector2.ZERO
+		falling = true
+		Global.falls += 1
+		animation.play("Falling")
+	if message:
+		$CanvasLayer.visible = false
 	sprite.rotation = 0
 	velocity = reduce_vel(delta, velocity)
 	turn_spotlight()
@@ -103,7 +115,7 @@ func jumping_state(delta):
 			Engine.time_scale = 1
 			line.clear_points()
 			jumps_made += 1
-			handle_Backpack()
+			#handle_Backpack()
 			Global.jumps += 1
 			dash_start_point = position
 			dash.start_dash(sprite,dash_length)
@@ -118,7 +130,7 @@ func jumping_state(delta):
 			dashPart.emitting = true
 			dashPart.restart()
 			return
-			
+		update_left()
 		if left:
 			sprite.frame = 6
 		else:
@@ -138,22 +150,19 @@ func falling_state(delta):
 	animation.play("Falling")
 	if Input.is_action_pressed("jump") and jumps_made < max_jumps:
 		state = JUMPING
-	
 	last_vel = velocity
 	velocity = move_and_slide(velocity, UP_DIRECTION, false)
 
 func flying_state(delta):
+	#handle_Backpack()
 	sprite.rotation = 0
 	velocity = reduce_vel(delta, velocity)
 	turn_spotlight()
-	if position.x < get_global_mouse_position().x:
-		animation.play("Idle_Right")
-		left = false
-		jumpLoad.frame = 0
-	else:
+	update_left()
+	if left:
 		animation.play("Idle_Left")
-		left = true
-		jumpLoad.frame = 4
+	else:
+		animation.play("Idle_Right")
 	if Input.is_action_pressed("jump") and jumps_made < max_jumps:
 		state = JUMPING
 	if position.y < dash_start_point.y - 20:
@@ -161,8 +170,6 @@ func flying_state(delta):
 		falling = true
 		Global.falls += 1
 		state = FALLING
-	
-
 	last_vel = velocity
 	velocity = move_and_slide(velocity, UP_DIRECTION, false)
 	
@@ -188,16 +195,24 @@ func dashing_state(delta):
 func lying_state(delta):
 	spotlight.enabled = false
 	sprite.rotation = 0
+	jumpLoad.frame = 0
 	if lying:
 		Engine.time_scale = 1
 		sprite.frame = 8
 		animation.play("Lying")
 	else:
-		handle_Backpack_Animation()
+		#backpackTimer.start()
+		#handle_Backpack()
 		state = IDLE
 	velocity = reduce_vel(delta, velocity)
 	last_vel = velocity
 	velocity = move_and_slide(velocity, UP_DIRECTION, false)
+
+func update_left():
+	if position.x < get_global_mouse_position().x:
+		left = false
+	else:
+		left = true
 
 func do_jump():
 	var dir = position.direction_to(get_global_mouse_position())
@@ -256,12 +271,13 @@ func reduce_vel(delta, vel):
 			vel.x = 0
 			is_jumping = false
 			state = IDLE
-			handle_Backpack_Animation()
+			#backpackTimer.start()
 			floor_particles(10,0.2)
 		elif state == JUMPING:
+			animation.stop()
 			vel.x = 0
 			is_jumping = false
-			handle_Backpack_Animation()
+			#backpackTimer.start()
 	elif is_on_wall():
 		vel.x = -last_vel.x * 0.75
 		if vel.x < last_vel.x:
@@ -311,50 +327,37 @@ func fadeout_done():
 	emit_signal("game_won")
 
 func handle_Backpack():
-	if jumps_made == 2:
-		jumpLoad.visible = false
-	elif jumps_made == 1:
-		jumpLoad.visible = true
-		if left:
-			jumpLoad.frame = 5
-		else:
-			jumpLoad.frame = 1
-	else:
-		if left:
-			jumpLoad.frame = 7
-		else:
-			jumpLoad.frame = 3
-
-func handle_Backpack_Animation():
-	if jumps_made == 2:
-		jumpLoad.visible = true
-		if left:
-			animation_back.play("Low_to_full_left")
-			print("looe left")
-		else:
-			animation_back.play("Low_to_full_right")
-			print("low right")
-	elif jumps_made == 1:
-		jumpLoad.visible = true
-		if left:
-			animation_back.play("Mid_to_full_left")
-			print("mid left")
-		else:
-			animation_back.play("Mid_to_full_right")
-			print("mid right")
-	else:
-		if left:
-			jumpLoad.frame = 7
-		else:
-			jumpLoad.frame = 3
+	if not is_jumping:
 		jumps_made = 0
+	if state == LYING:
+		jumpLoad.frame = 0
+		return
+	if jumps_made == 2:
+		jumpLoad.frame = 0
+	elif jumps_made == 1:
+		if left:
+			jumpLoad.frame = 6
+		else:
+			jumpLoad.frame = 2
+	elif jumps_made == 0:
+		if left:
+			jumpLoad.frame = 8
+		else:
+			jumpLoad.frame = 4
 
-func set_jumpsmade_zero():
-	jumps_made = 0
-	print("reduced")
+func change_spot(val, smooth_val = 10):
+	spotlight.energy = val
+	spotlight.shadow_filter_smooth = smooth_val
+
+func change_circle(val, smooth_val = 50, tex_scale = 0.3):
+	circle_light.energy = val
+	circle_light.shadow_filter_smooth = smooth_val
+	circle_light.texture_scale = tex_scale
 
 func fadein():
 	$TransitionPlayer.play("Fadein")
+	message = true
+	$CanvasLayer.visible = true
 	
 func connect_goal():
 	var goal = get_parent().find_node("Goal")
@@ -365,3 +368,29 @@ func get_coin():
 
 func _on_LyingTimer_timeout() -> void:
 	lying = false
+
+
+func _on_TimerBackpack_timeout() -> void:
+	update_left()
+	if left:
+		match jumpLoad.frame:
+			1:
+				jumpLoad.frame = 5
+			2:
+				jumpLoad.frame = 6
+			3:
+				jumpLoad.frame = 7
+	else:
+		match jumpLoad.frame:
+			5:
+				jumpLoad.frame = 1
+			6:
+				jumpLoad.frame = 2
+			7:
+				jumpLoad.frame = 3
+	if jumpLoad.frame == 8 or jumpLoad.frame == 4:
+		jumps_made = 0
+	else:
+		jumpLoad.frame += 1
+		backpackTimer.start()
+

@@ -12,4 +12,6 @@ func display():
 	visible = true
 
 func _on_Menu_pressed() -> void:
+	Global.reset_everything()
+	Global.save_to_file()
 	get_tree().change_scene("res://MainMenu.tscn")

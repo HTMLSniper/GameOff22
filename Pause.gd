@@ -9,14 +9,18 @@ func _input(event):
 		var new_pause_state = not get_tree().paused # negate
 		get_tree().paused = new_pause_state
 		visible = new_pause_state
+		Global.paused = new_pause_state
 
 func _on_Resume_pressed() -> void:
 	var new_pause_state = not get_tree().paused # negate
 	get_tree().paused = new_pause_state
 	visible = new_pause_state
+	Global.paused = new_pause_state
 
 func _on_Menu_pressed() -> void:
+	Global.save_to_file()
 	var new_pause_state = not get_tree().paused # negate
 	get_tree().paused = new_pause_state
 	visible = new_pause_state
+	Global.paused = new_pause_state
 	get_tree().change_scene("res://MainMenu.tscn")

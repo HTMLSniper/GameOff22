@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=2]
+[gd_scene load_steps=132 format=2]
 
 [ext_resource path="res://assets/parallax_1_2.png" type="Texture" id=1]
 [ext_resource path="res://assets/WaterAutoTile.png" type="Texture" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://hover_button.tres" type="StyleBox" id=8]
 [ext_resource path="res://assets/bubble.png" type="Texture" id=9]
 [ext_resource path="res://icon.png" type="Texture" id=10]
+[ext_resource path="res://ContinueLayer.gd" type="Script" id=11]
+[ext_resource path="res://assets/textfield.png" type="Texture" id=12]
+[ext_resource path="res://OptionLayer.gd" type="Script" id=13]
 
 [sub_resource type="ParticlesMaterial" id=124]
 lifetime_randomness = 0.13
@@ -963,6 +966,14 @@ shader_param/blue_tint = Color( 0.439216, 0.588235, 0.67451, 1 )
 shader_param/color_mix = 0.2
 shader_param/sprite_scale = Vector2( 10.531, 6.375 )
 
+[sub_resource type="DynamicFont" id=125]
+size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=126]
+size = 32
+font_data = ExtResource( 4 )
+
 [node name="MainMenu" type="Node2D"]
 script = ExtResource( 5 )
 
@@ -1068,6 +1079,139 @@ centered = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
+[node name="OptionLayer" type="CanvasLayer" parent="."]
+visible = false
+scale = Vector2( 1, 0 )
+transform = Transform2D( 1, 0, 0, 0, 0, 0 )
+script = ExtResource( 13 )
+
+[node name="Sprite" type="Sprite" parent="OptionLayer"]
+position = Vector2( 65, -264 )
+scale = Vector2( 1, 2 )
+texture = ExtResource( 12 )
+centered = false
+
+[node name="Label" type="Label" parent="OptionLayer"]
+margin_left = 224.0
+margin_top = 89.0
+margin_right = 550.0
+margin_bottom = 136.0
+custom_fonts/font = SubResource( 125 )
+text = "Options"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="OptionLayer"]
+margin_left = 207.0
+margin_top = 150.0
+margin_right = 398.0
+margin_bottom = 197.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_fonts/font = SubResource( 126 )
+text = "Music Volume"
+align = 1
+valign = 1
+
+[node name="Label3" type="Label" parent="OptionLayer"]
+margin_left = 208.0
+margin_top = 198.0
+margin_right = 401.0
+margin_bottom = 245.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_fonts/font = SubResource( 125 )
+text = "Sound Volume"
+align = 1
+valign = 1
+
+[node name="Back" type="Button" parent="OptionLayer"]
+margin_left = 470.0
+margin_top = 241.0
+margin_right = 562.0
+margin_bottom = 270.0
+focus_mode = 0
+custom_colors/font_color = Color( 1.5, 1.5, 1.5, 1 )
+custom_colors/font_color_hover = Color( 1.5, 1.5, 1.5, 1 )
+custom_colors/font_color_pressed = Color( 1.5, 1.5, 1.5, 1 )
+custom_fonts/font = SubResource( 65 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/normal = ExtResource( 7 )
+enabled_focus_mode = 0
+text = "Back"
+
+[node name="MusicSlider" type="HSlider" parent="OptionLayer"]
+margin_left = 215.0
+margin_top = 175.0
+margin_right = 415.0
+margin_bottom = 191.0
+value = 50.0
+
+[node name="SoundSlider" type="HSlider" parent="OptionLayer"]
+margin_left = 215.0
+margin_top = 223.0
+margin_right = 415.0
+margin_bottom = 239.0
+value = 50.0
+
+[node name="Tween" type="Tween" parent="OptionLayer"]
+
+[node name="ContinueLayer" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource( 11 )
+
+[node name="Sprite" type="Sprite" parent="ContinueLayer"]
+position = Vector2( 0, -277 )
+scale = Vector2( 1, 2 )
+texture = ExtResource( 12 )
+centered = false
+
+[node name="Label" type="Label" parent="ContinueLayer"]
+margin_left = 157.0
+margin_top = 89.0
+margin_right = 483.0
+margin_bottom = 156.0
+custom_fonts/font = SubResource( 125 )
+text = "You want to continue?"
+align = 1
+valign = 1
+
+[node name="Continue" type="Button" parent="ContinueLayer"]
+margin_left = 163.0
+margin_top = 191.0
+margin_right = 303.0
+margin_bottom = 241.0
+focus_mode = 0
+custom_colors/font_color = Color( 1.5, 1.5, 1.5, 1 )
+custom_colors/font_color_hover = Color( 1.5, 1.5, 1.5, 1 )
+custom_colors/font_color_pressed = Color( 1.5, 1.5, 1.5, 1 )
+custom_fonts/font = SubResource( 65 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/normal = ExtResource( 7 )
+enabled_focus_mode = 0
+text = "Continue"
+
+[node name="Restart" type="Button" parent="ContinueLayer"]
+margin_left = 337.0
+margin_top = 191.0
+margin_right = 477.0
+margin_bottom = 241.0
+focus_mode = 0
+custom_colors/font_color = Color( 1.5, 1.5, 1.5, 1 )
+custom_colors/font_color_hover = Color( 1.5, 1.5, 1.5, 1 )
+custom_colors/font_color_pressed = Color( 1.5, 1.5, 1.5, 1 )
+custom_fonts/font = SubResource( 65 )
+custom_styles/hover = ExtResource( 8 )
+custom_styles/pressed = ExtResource( 6 )
+custom_styles/normal = ExtResource( 7 )
+enabled_focus_mode = 0
+text = "Restart"
+
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
+[connection signal="pressed" from="OptionLayer/Back" to="OptionLayer" method="_on_Back_pressed"]
+[connection signal="value_changed" from="OptionLayer/MusicSlider" to="OptionLayer" method="_on_MusicSlider_value_changed"]
+[connection signal="value_changed" from="OptionLayer/SoundSlider" to="OptionLayer" method="_on_SoundSlider_value_changed"]
+[connection signal="pressed" from="ContinueLayer/Continue" to="ContinueLayer" method="_on_Continue_pressed"]
+[connection signal="pressed" from="ContinueLayer/Restart" to="ContinueLayer" method="_on_Restart_pressed"]
