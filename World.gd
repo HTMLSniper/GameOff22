@@ -50,7 +50,6 @@ func change_color_for_depth(player, delta):
 #	elif last_pos == 4 and pos > 4600:
 #		return
 	var pos = player.position.y
-	print(canvas_modulate.color)
 	var tween = $CanvasModulate/Tween
 	if pos < 700:
 		#canvas_modulate.color = "ffffff"
