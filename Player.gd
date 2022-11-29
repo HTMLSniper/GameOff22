@@ -58,7 +58,7 @@ func _ready() -> void:
 	Global.reg_player(self)
 	spotlight.energy = lightintensity_cone
 	circle_light.energy = lightintensity_circle
-
+	change_sprite(Global.sprite_texture)
 
 func _physics_process(delta: float) -> void:
 	handle_Backpack()
@@ -365,7 +365,11 @@ func connect_goal():
 	goal.connect("goal_entered", self, "won")
 
 func get_coin():
-	Global.coins += 1
+	Global.settings["coins"] = Global.settings["coins"] + 1
+	print(Global.settings["coins"])
+
+func change_sprite(path):
+	sprite.set_texture(path)
 
 func _on_LyingTimer_timeout() -> void:
 	lying = false

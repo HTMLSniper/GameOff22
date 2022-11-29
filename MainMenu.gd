@@ -24,3 +24,7 @@ func _on_Quit_pressed() -> void:
 
 func music_changed():
 	pass
+
+
+func _on_Shop_pressed():
+	get_tree().change_scene("res://Shop.tscn")

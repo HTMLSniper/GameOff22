@@ -15,7 +15,7 @@ func _ready() -> void:
 	Global.load_from_file()
 	Global.player.connect_goal()
 	Shake.set_cam()
-	#add_debug_stats()
+	add_debug_stats()
 	Global.player.fadein()
 
 func _process(delta: float) -> void:
@@ -28,10 +28,10 @@ func add_debug_stats():
 	debug_overlay.add_stat("Player velocity", $Player, "velocity", false)
 	debug_overlay.add_stat("Player jumping", $Player, "is_jumping", false)
 	debug_overlay.add_stat("Player jumps made", $Player, "jumps_made", false)
-	debug_overlay.add_stat("Player jump height", $Player, "jump_height", false)
 	debug_overlay.add_stat("Player backpack frame", $Player, "get_stats", true)
+	debug_overlay.add_stat("Player jump height", $Player, "jump_height", false)
 	debug_overlay.add_stat("Player on floor", $Player, "is_on_floor", true)
-	debug_overlay.add_stat("Coins", Global, "coins", false)
+	#debug_overlay.add_stat("Coins", Global, "coins", false)
 	debug_overlay.add_stat("GMin", Global, "timem", false)
 	debug_overlay.add_stat("GSec", Global, "times", false)
 	debug_overlay.add_stat("Timer Zero", $CanvasLayer/HUD/Timer, "time_zero", false)

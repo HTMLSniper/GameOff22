@@ -19,6 +19,7 @@ func _on_Resume_pressed() -> void:
 
 func _on_Menu_pressed() -> void:
 	Global.save_to_file()
+	Global.save()
 	var new_pause_state = not get_tree().paused # negate
 	get_tree().paused = new_pause_state
 	visible = new_pause_state
