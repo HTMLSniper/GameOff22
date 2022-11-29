@@ -86,4 +86,8 @@ shadow_gradient_length = 0.5
 shadow_filter = 2
 shadow_filter_smooth = 10.0
 
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 3, -9.5 )
+scale = Vector2( 21.2, 16.95 )
+
 [connection signal="body_entered" from="." to="." method="_on_Coin_body_entered"]

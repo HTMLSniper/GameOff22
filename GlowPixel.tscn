@@ -15,3 +15,7 @@ energy = 0.6
 shadow_gradient_length = 0.5
 shadow_filter = 2
 shadow_filter_smooth = 10.0
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 1.5, 8 )
+scale = Vector2( 7.55, 6.5 )
