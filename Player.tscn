@@ -741,6 +741,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle_Left"
 anims/Dashing_left = SubResource( 16 )
 anims/Dashing_right = SubResource( 15 )
 anims/Falling = SubResource( 14 )

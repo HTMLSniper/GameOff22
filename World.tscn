@@ -2919,34 +2919,34 @@ tile_data = PoolIntArray( 65556, 0, 4, 196615, 1, 5, 196617, 5, 0, 196643, 5, 0,
 [node name="Coins" type="Node" parent="."]
 
 [node name="Coin" parent="Coins" instance=ExtResource( 14 )]
-position = Vector2( 553, 357 )
+position = Vector2( 552, 358 )
 
 [node name="Coin2" parent="Coins" instance=ExtResource( 14 )]
-position = Vector2( 22, 1286 )
+position = Vector2( 24, 1287 )
 
 [node name="Coin3" parent="Coins" instance=ExtResource( 14 )]
-position = Vector2( 536, 2070 )
+position = Vector2( 536, 2072 )
 
 [node name="Coin4" parent="Coins" instance=ExtResource( 14 )]
-position = Vector2( 38, 2486 )
+position = Vector2( 41, 2487 )
 
 [node name="Coin5" parent="Coins" instance=ExtResource( 14 )]
-position = Vector2( 602, 3222 )
+position = Vector2( 600, 3223 )
 
 [node name="Coin6" parent="Coins" instance=ExtResource( 14 )]
-position = Vector2( 70, 3238 )
+position = Vector2( 72, 3239 )
 
 [node name="Coin7" parent="Coins" instance=ExtResource( 14 )]
-position = Vector2( 618, 4566 )
+position = Vector2( 616, 4567 )
 
 [node name="Coin8" parent="Coins" instance=ExtResource( 14 )]
-position = Vector2( 616, 4150 )
+position = Vector2( 616, 4152 )
 
 [node name="Coin9" parent="Coins" instance=ExtResource( 14 )]
-position = Vector2( 22, 4182 )
+position = Vector2( 24, 4183 )
 
 [node name="Coin10" parent="Coins" instance=ExtResource( 14 )]
-position = Vector2( 519, 5510 )
+position = Vector2( 520, 5511 )
 
 [node name="Lights" type="Node" parent="."]
 

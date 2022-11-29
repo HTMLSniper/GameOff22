@@ -1,12 +1,57 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/pixel.png" type="Texture" id=1]
 [ext_resource path="res://assets/circleLight.png" type="Texture" id=2]
+[ext_resource path="res://GlowPixel.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.6 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.3, 1.5, 1.49, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "pulse"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:energy")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 0.277392, 4.75683, 0.353554 ),
+"update": 0,
+"values": [ 0.6, 0.3, 0.6 ]
+}
 
 [node name="GlowPixel" type="Sprite"]
 modulate = Color( 0.3, 1.5, 1.49, 1 )
 texture = ExtResource( 1 )
 centered = false
+script = ExtResource( 3 )
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 2 )
@@ -19,3 +64,12 @@ shadow_filter_smooth = 10.0
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 position = Vector2( 1.5, 8 )
 scale = Vector2( 7.55, 6.5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/pulse = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

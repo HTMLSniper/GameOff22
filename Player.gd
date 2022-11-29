@@ -54,7 +54,7 @@ onready var landingPart = $LandingParticles
 onready var dashPart = $Sprite/DashParticles
 
 func _ready() -> void:
-	animation.play("Idle_Left")
+	#animation.play("Idle_Left")
 	Global.reg_player(self)
 	spotlight.energy = lightintensity_cone
 	circle_light.energy = lightintensity_circle
