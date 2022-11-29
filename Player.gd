@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const UP_DIRECTION := Vector2.DOWN
 
-export var speed := 20.0
+export var speed := 32.0
 export var waterResistance := 20.0
 export var jump_gravity := 500.0
 export var fall_gravity := 1000.0
@@ -14,7 +14,7 @@ export var lightintensity_circle = 0.5
 var jumps_made := 0
 var max_jumps := 2
 var velocity := Vector2.ZERO # Geschwindigkeit
-var jump_height := 0.0
+var jump_height := 0
 var is_jumping := false
 var last_vel := Vector2.ZERO
 var max_points := 5
@@ -62,7 +62,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	handle_Backpack()
-	# jumpheight correct
 	match state:
 		IDLE:
 			idle_state(delta)

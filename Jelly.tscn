@@ -1,0 +1,104 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://assets/circleLight.png" type="Texture" id=1]
+[ext_resource path="res://assets/Jellyfish Sprite Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Jelly.gd" type="Script" id=3]
+
+[sub_resource type="Curve2D" id=12]
+_data = {
+"points": PoolVector2Array( -67.0671, 60.8936, 67.0671, -60.8936, -50, -2, -37.8831, 40.4086, 37.8831, -40.4086, 12, -1, 45.4597, 3.08677, -45.4597, -3.08677, 33, 27, -2.52554, -50.2302, 2.52554, 50.2302, -30, 7, 4.77046, -30.8677, -4.77046, 30.8677, -43, 1, -0.561231, 25.536, 0.561231, -25.536, 1, -18, -13.1889, 25.536, 13.1889, -25.536, 47, 6, -39.2862, -13.7502, 39.2862, 13.7502, -6, 27, 12.6277, -22.7299, -12.6277, 22.7299, -3, -25, 10.6634, 23.0105, -10.6634, -23.0105, 45, -22, -54.72, -0.841846, 54.72, 0.841846, -17, 21, -6.30672, 12.0879, 6.30672, -12.0879, -50, -2 )
+}
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 32, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "move",
+"speed": 5.0
+} ]
+
+[sub_resource type="OccluderPolygon2D" id=13]
+polygon = PoolVector2Array( -2.00001, 4.17233e-07, -2.00001, 4.17233e-07, -1.00001, 1, -7.6592e-06, 1, 0.999992, 1, 1.99999, 4.17233e-07, 1.99999, 4.17233e-07, 1.99999, -1, 0.999992, -2, 0.999992, -3, -7.51019e-06, -4, -1.00001, -3, -1.00001, -2, -1.00001, -2, -2.00001, -1 )
+
+[node name="Jelly" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 3.00001, -9.5 )
+scale = Vector2( 21.2, 16.95 )
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( -2, 9.53674e-07 )
+scale = Vector2( 0.376217, 0.473929 )
+curve = SubResource( 12 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( -50, -2 )
+rotation = -0.728882
+rotate = false
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Path2D/PathFollow2D"]
+modulate = Color( 0, 0.78, 1.3, 1 )
+rotation = 0.728882
+scale = Vector2( 2.65804, 2.11002 )
+frames = SubResource( 11 )
+animation = "move"
+frame = 1
+playing = true
+
+[node name="Light2D" type="Light2D" parent="Path2D/PathFollow2D/AnimatedSprite"]
+texture = ExtResource( 1 )
+texture_scale = 0.1
+color = Color( 0, 0.784314, 1, 1 )
+energy = 0.5
+shadow_gradient_length = 0.5
+shadow_filter = 2
+shadow_filter_smooth = 10.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Path2D/PathFollow2D/AnimatedSprite"]
+occluder = SubResource( 13 )

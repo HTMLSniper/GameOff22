@@ -1,4 +1,4 @@
-[gd_scene load_steps=289 format=2]
+[gd_scene load_steps=290 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://GlowPixel.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/underwater_plants.png" type="Texture" id=19]
 [ext_resource path="res://assets/underwater_plants_NormalMap.png" type="Texture" id=20]
+[ext_resource path="res://Jelly.tscn" type="PackedScene" id=21]
 
 [sub_resource type="OccluderPolygon2D" id=76]
 polygon = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -3070,6 +3071,81 @@ position = Vector2( 286, 24 )
 __meta__ = {
 "_edit_lock_": true
 }
+speed = 32.0
+
+[node name="Jellys" type="Node" parent="."]
+
+[node name="Jelly" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 524, 159 )
+
+[node name="Jelly2" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 155, 559 )
+
+[node name="Jelly3" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 445, 846 )
+
+[node name="Jelly4" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 152, 1170 )
+
+[node name="Jelly5" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 521, 1311 )
+
+[node name="Jelly6" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 165, 1662 )
+
+[node name="Jelly7" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 327, 1758 )
+
+[node name="Jelly8" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 151, 2431 )
+
+[node name="Jelly9" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 600, 2496 )
+
+[node name="Jelly10" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 71, 3149 )
+
+[node name="Jelly11" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 107, 3343 )
+
+[node name="Jelly12" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 601, 3421 )
+
+[node name="Jelly13" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 410, 3711 )
+
+[node name="Jelly14" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 443, 3985 )
+
+[node name="Jelly15" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 586, 4256 )
+
+[node name="Jelly16" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 596, 4402 )
+
+[node name="Jelly17" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 86, 4782 )
+
+[node name="Jelly18" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 396, 4945 )
+
+[node name="Jelly19" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 366, 5184 )
+
+[node name="Jelly20" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 144, 5138 )
+
+[node name="Jelly21" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 39, 5008 )
+
+[node name="Jelly22" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 55, 5631 )
+
+[node name="Jelly23" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 425, 5472 )
+
+[node name="Jelly24" parent="Jellys" instance=ExtResource( 21 )]
+position = Vector2( 602, 5454 )
 
 [node name="Water" type="Sprite" parent="."]
 material = SubResource( 6 )
