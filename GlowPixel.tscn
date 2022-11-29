@@ -41,10 +41,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 0.277392, 4.75683, 0.353554 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.4, 1.5, 2 ),
+"transitions": PoolRealArray( 0.277392, 1, 4.75683, 1, 1, 0.353554 ),
 "update": 0,
-"values": [ 0.6, 0.3, 0.6 ]
+"values": [ 0.6, 0.6, 0.3, 0.7, 0.6, 0.6 ]
 }
 
 [node name="GlowPixel" type="Sprite"]
