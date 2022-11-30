@@ -1,4 +1,4 @@
-[gd_scene load_steps=292 format=2]
+[gd_scene load_steps=295 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -23,6 +23,9 @@
 [ext_resource path="res://Jelly.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/shipNormalMap.png" type="Texture" id=22]
 [ext_resource path="res://assets/ship.png" type="Texture" id=23]
+[ext_resource path="res://Fish.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Octupus.tscn" type="PackedScene" id=25]
+[ext_resource path="res://crabby.tscn" type="PackedScene" id=26]
 
 [sub_resource type="OccluderPolygon2D" id=76]
 polygon = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -3357,6 +3360,60 @@ margin_bottom = 154.0
 rect_scale = Vector2( 0.7, 0.7 )
 custom_fonts/font = SubResource( 250 )
 text = "[Try Dashing twice]"
+
+[node name="Octopusses" type="Node" parent="."]
+
+[node name="Octupus" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 159, 309 )
+
+[node name="Octupus2" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 364, 671 )
+
+[node name="Octupus3" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 188, 1369 )
+
+[node name="Octupus4" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 487, 1917 )
+
+[node name="Octupus5" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 405, 2308 )
+
+[node name="Octupus6" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 151, 3686 )
+
+[node name="Octupus7" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 247, 4304 )
+
+[node name="Octupus8" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 159, 5359 )
+
+[node name="Crabbies" type="Node" parent="."]
+
+[node name="Crabby" parent="Crabbies" instance=ExtResource( 26 )]
+position = Vector2( 408, 736 )
+
+[node name="Fishes" type="Node" parent="."]
+
+[node name="Fish2" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 184, 824 )
+
+[node name="Fish" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 428, 442 )
+
+[node name="Fish3" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 370, 1541 )
+
+[node name="Fish4" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 162, 2097 )
+
+[node name="Fish5" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 200, 2639 )
+
+[node name="Fish6" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 246, 3542 )
+
+[node name="Fish7" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 205, 4491 )
 
 [connection signal="pressed" from="CanvasLayer/Pause/Resume" to="CanvasLayer/Pause" method="_on_Resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/Pause/Menu" to="CanvasLayer/Pause" method="_on_Menu_pressed"]

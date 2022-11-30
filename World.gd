@@ -15,7 +15,7 @@ func _ready() -> void:
 	Global.load_from_file()
 	Global.player.connect_goal()
 	Shake.set_cam()
-	add_debug_stats()
+	#add_debug_stats()
 	Global.player.fadein()
 
 func _process(delta: float) -> void:
