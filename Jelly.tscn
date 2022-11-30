@@ -85,9 +85,10 @@ rotate = false
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Path2D/PathFollow2D"]
 modulate = Color( 0, 0.78, 1.3, 1 )
 rotation = 0.728882
-scale = Vector2( 2.65804, 2.11002 )
+scale = Vector2( 2.5, 2.5 )
 frames = SubResource( 11 )
 animation = "move"
+frame = 2
 playing = true
 
 [node name="Light2D" type="Light2D" parent="Path2D/PathFollow2D/AnimatedSprite"]
