@@ -24,7 +24,7 @@ var dash_length = .15
 var falling = false
 var lying = false
 var dash_start_point = Vector2.ZERO
-var message = true
+var message = false
 
 enum{
 	IDLE,
@@ -52,6 +52,11 @@ onready var spotlight = $Spotlight
 onready var circle_light = $CircleLight
 onready var landingPart = $LandingParticles
 onready var dashPart = $Sprite/DashParticles
+onready var dashSound
+onready var landingSound
+onready var fallingSound
+onready var bounceSound
+onready var lyingSound
 
 func _ready() -> void:
 	#animation.play("Idle_Left")
@@ -59,6 +64,8 @@ func _ready() -> void:
 	spotlight.energy = lightintensity_cone
 	circle_light.energy = lightintensity_circle
 	change_sprite(Global.sprite_texture)
+	Global.connect("sound_changed_live", self, "sound_changed")
+	#sound_changed()
 
 func _physics_process(delta: float) -> void:
 	handle_Backpack()
@@ -357,8 +364,9 @@ func change_circle(val, smooth_val = 50, tex_scale = 0.3):
 
 func fadein():
 	$TransitionPlayer.play("Fadein")
-	message = true
-	$CanvasLayer.visible = true
+	if Global.time_played <= 1000:
+		message = true
+		$CanvasLayer.visible = true
 	
 func connect_goal():
 	var goal = get_parent().find_node("Goal")
@@ -371,9 +379,27 @@ func get_coin():
 func change_sprite(path):
 	sprite.set_texture(path)
 
+func sound_changed():
+	if Global.sound_on:
+		dashSound.volume_db = Global.sound_vol - 10
+		landingSound.volume_db = Global.sound_vol - 10
+		fallingSound.volume_db = Global.sound_vol - 10
+		bounceSound.volume_db = Global.sound_vol - 10
+		lyingSound.volume_db = Global.sound_vol - 10
+	else:
+		dashSound.volume_db = -80
+		landingSound.volume_db = -80
+		fallingSound.volume_db = -80
+		bounceSound.volume_db = -80
+		lyingSound.volume_db = -80
+		dashSound.stop()
+		landingSound.stop()
+		fallingSound.stop()
+		bounceSound.stop()
+		lyingSound.stop()
+
 func _on_LyingTimer_timeout() -> void:
 	lying = false
-
 
 func _on_TimerBackpack_timeout() -> void:
 	update_left()

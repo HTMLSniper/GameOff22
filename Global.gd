@@ -17,6 +17,7 @@ var paused = false
 var time_played = 0
 var goal : Node2D
 var sprite_texture = bombo
+var coins = []
 
 var music_vol : float = 50.0
 var sound_vol : float = 50.0
@@ -42,6 +43,11 @@ func save_to_file():
 	save_data.store_var(jumps)
 	save_data.store_var(falls)
 	save_data.store_var(time_played)
+	save_data.store_var(coins)
+	save_data.store_var(music_vol)
+	save_data.store_var(sound_vol)
+	save_data.store_var(music_on)
+	save_data.store_var(sound_on)
 	save_data.close()
 
 func load_from_file():
@@ -56,6 +62,11 @@ func load_from_file():
 		jumps = save_data.get_var()
 		falls = save_data.get_var()
 		time_played = save_data.get_var()
+		coins = save_data.get_var()
+		music_vol = save_data.get_var()
+		sound_vol = save_data.get_var()
+		music_on = save_data.get_var()
+		sound_on = save_data.get_var()
 		save_data.close() 
 		
 		
