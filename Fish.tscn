@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/circleLight.png" type="Texture" id=1]
 [ext_resource path="res://assets/fish.png" type="Texture" id=2]
@@ -39,7 +39,10 @@ animations = [ {
 } ]
 
 [sub_resource type="OccluderPolygon2D" id=5]
-polygon = PoolVector2Array( -11.5697, 1.50223, -11.6512, 4.50047, -5.78485, 0.751113, -1.75369, 3.92672, 5.67621, 3.24655, 10.6657, 1.46055, 8.30675, -2.64353, 5.07096, -4.78424, 2.60338, -4.89066, 0.985487, -5.96102, -1.50925, -5.06802, -4.00399, -4.17502, -5.73053, -1.24772, -12.2564, -3.53032, -11.5154, -0.496604 )
+polygon = PoolVector2Array( -10.8287, 4.53594, -5.812, 1.75053, -1.75369, 3.92672, 2.33179, 5.10349, 8.99348, 2.38902, 10.6657, 1.46055, 10.6928, 0.461134, 10.1522, -1.2894, 5.0438, -3.78483, 0.958328, -4.9616, -1.50925, -5.06802, -3.18147, -4.13955, -5.75769, -0.248301, -11.4611, -2.49543, -9.89749, 0.573755 )
+
+[sub_resource type="OccluderPolygon2D" id=8]
+polygon = PoolVector2Array( -7.14911, 1.48555, -3.23708, 2.75153, 3.73554, 3.26087, 9.88812, 1.70271, 15.6886, 4.13403, 13.9605, 0.996395, 15.3087, -2.92032, 10.1522, -1.2894, 5.42011, -4.62288, 1.52378, -5.9113, -1.50925, -5.06802, -3.54469, -5.27775, -6.62097, -4.49867, -10.9574, -0.800241, -10.5256, 0.288101 )
 
 [node name="Fish" type="Node2D"]
 script = ExtResource( 3 )
@@ -61,9 +64,10 @@ rotate = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Path2D/PathFollow2D"]
 modulate = Color( 0, 0.78, 1.3, 1 )
-scale = Vector2( 2.65804, 2.11002 )
+scale = Vector2( 2.5, 2.5 )
 frames = SubResource( 4 )
 animation = "move right"
+frame = 1
 playing = true
 
 [node name="Light2D" type="Light2D" parent="Path2D/PathFollow2D/AnimatedSprite"]
@@ -76,6 +80,14 @@ shadow_gradient_length = 0.5
 shadow_filter = 2
 shadow_filter_smooth = 10.0
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Path2D/PathFollow2D/AnimatedSprite"]
-position = Vector2( 0.822529, 0.0354717 )
+[node name="Right_LightOccluder" type="LightOccluder2D" parent="Path2D/PathFollow2D/AnimatedSprite"]
+visible = false
+position = Vector2( 0.194424, -0.250186 )
 occluder = SubResource( 5 )
+
+[node name="Left_LightOccluder" type="LightOccluder2D" parent="Path2D/PathFollow2D/AnimatedSprite"]
+visible = false
+position = Vector2( -1.47742, 0.678116 )
+rotation = -0.0453786
+scale = Vector2( 0.823291, 0.999784 )
+occluder = SubResource( 8 )
