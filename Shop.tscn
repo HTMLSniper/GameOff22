@@ -1178,6 +1178,7 @@ centered = false
 position = Vector2( 248, 331 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 153 )
+frame = 1
 playing = true
 
 [node name="Moneylabel" type="Label" parent="Moneycoin"]
@@ -1192,6 +1193,7 @@ text = "0"
 position = Vector2( 88, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 144 )
+frame = 1
 playing = true
 
 [node name="Button_crown" type="Button" parent="crown"]
@@ -1211,7 +1213,7 @@ flat = true
 position = Vector2( 320, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 133 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="Button_diver" type="Button" parent="Diver"]
@@ -1231,7 +1233,6 @@ flat = true
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
-frame = 2
 playing = true
 
 [node name="Costdiver" type="Label" parent="Diver/Coin"]
@@ -1247,7 +1248,6 @@ text = "5"
 position = Vector2( 200, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 149 )
-frame = 3
 playing = true
 
 [node name="Button_princess_bombo" type="Button" parent="Princess as bombo"]
@@ -1269,7 +1269,7 @@ icon_align = 1
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Costprincess" type="Label" parent="Princess as bombo/Coin"]
@@ -1285,6 +1285,7 @@ text = "5"
 position = Vector2( 552, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 159 )
+frame = 1
 playing = true
 
 [node name="Button_bombo_mario" type="Button" parent="bombo_mario"]
@@ -1304,6 +1305,7 @@ flat = true
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
+frame = 1
 playing = true
 
 [node name="Costbombo_mario" type="Label" parent="bombo_mario/Coin"]
@@ -1319,7 +1321,6 @@ text = "5"
 position = Vector2( 440, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 139 )
-frame = 3
 playing = true
 
 [node name="Button_amongo" type="Button" parent="amongo"]
@@ -1339,7 +1340,7 @@ flat = true
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Costamongo" type="Label" parent="amongo/Coin"]

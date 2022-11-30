@@ -100,5 +100,4 @@ occluder = SubResource( 16 )
 
 [node name="Left_LightOccluder" type="LightOccluder2D" parent="Path2D/PathFollow2D/AnimatedSprite"]
 position = Vector2( 0.81085, -0.052142 )
-scale = Vector2( 1, 1 )
 occluder = SubResource( 17 )

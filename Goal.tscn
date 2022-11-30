@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Goal.gd" type="Script" id=1]
 [ext_resource path="res://assets/bomboprincess.png" type="Texture" id=2]
+[ext_resource path="res://assets/circleLight.png" type="Texture" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -39,5 +40,13 @@ position = Vector2( -4.5, 17.5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 light_mask = 256
 shape = SubResource( 4 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+texture_scale = 0.4
+energy = 0.6
+shadow_gradient_length = 0.5
+shadow_filter = 2
+shadow_filter_smooth = 10.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

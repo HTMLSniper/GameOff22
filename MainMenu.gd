@@ -6,6 +6,9 @@ func _ready() -> void:
 
 
 func _on_Play_pressed() -> void:
+	var temp_pos = Global.player.position
+	Global.load_from_file()
+	Global.player.position = temp_pos
 	if Global.time_played > 0:
 		$ContinueLayer.visible = true
 	else:

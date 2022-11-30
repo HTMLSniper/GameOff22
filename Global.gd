@@ -1,6 +1,7 @@
 extends Node
 
 const SAVE_FILE_PATH = "user://savedata.save"
+const SKIN_FILE_NAME = "user://skinsavedata.save"
 
 signal music_changed_live
 signal sound_changed_live
@@ -19,6 +20,15 @@ var goal : Node2D
 var sprite_texture = bombo
 var coins = []
 
+var settings = {
+	"coins" : 0,
+	"skin_crown" : 0,
+	"skin_princess" : 0,
+	"skin_diver" : 0,
+	"skin_amongo" : 0,
+	"skin_mario" : 0,
+}
+
 var music_vol : float = 50.0
 var sound_vol : float = 50.0
 var music_on : bool = true
@@ -30,7 +40,6 @@ func reg_player(node):
 
 func reg_goal(node):
 	goal = node
-
 
 func save_to_file():
 	var save_data = File.new()
@@ -68,8 +77,8 @@ func load_from_file():
 		music_on = save_data.get_var()
 		sound_on = save_data.get_var()
 		save_data.close() 
-		
-		
+
+
 func reset_everything():
 	player.position.x = 286
 	player.position.y = 24
@@ -97,28 +106,20 @@ func change_sound(value):
 		sound_on = true
 	emit_signal("sound_changed_live")
 	
-const FILE_NAME = "user://game-data.json"
 
-var settings = {
-	"coins" : 0,
-	"skin_crown" : 0,
-	"skin_princess" : 0,
-	"skin_diver" : 0,
-	"skin_amongo" : 0,
-	"skin_mario" : 0,
-}
 func save():
 	var file = File.new()
-	file.open(FILE_NAME, File.WRITE)
-	file.store_string(to_json(settings))
-	print("File Saved")
+	file.open(SKIN_FILE_NAME, File.WRITE)
+	#file.store_string(to_json(settings))
+	file.store_var(settings)
 	file.close()
 	
 func load():
 	var file = File.new()
-	if file.file_exists(FILE_NAME):
-		file.open(FILE_NAME, File.READ)
-		var data = parse_json(file.get_as_text())
+	if file.file_exists(SKIN_FILE_NAME):
+		file.open(SKIN_FILE_NAME, File.READ)
+		#var data = parse_json(file.get_as_text()
+		var data = file.get_var()
 		file.close()
 		if typeof(data) == TYPE_DICTIONARY:
 			settings = data
@@ -126,3 +127,4 @@ func load():
 			printerr("Corrupted data!")
 	else:
 		printerr("No saved data!")
+	print(settings)
