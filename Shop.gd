@@ -4,17 +4,17 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
-
+var bombo_mario = preload("res://assets/bombo_mario.png")
+var bombo = preload("res://assets/bombo.png")
 var diver = preload("res://assets/diver.png")
 var princess_crown = preload("res://assets/bombo_as_princess.png")
 var crown = preload("res://assets/bombo_crowned.png")
 var amongusfinalskin = preload("res://assets/AmongusFinalSkin.png")
 # Called when the node enters the scene tree for the first time.
-var cost_amongo = 10
-var cost_crown = 2
-var cost_princess = 4
-var cost_diver = 5
+var cost_amongo = 4
+var cost_princess = 3
+var cost_diver = 3
+var cost_mario = 5
 
 func _ready():
 	Global.load()
@@ -24,7 +24,8 @@ func _ready():
 	$Diver/Coin/Costdiver.text = String(cost_diver)
 	$amongo/Coin/Costamongo.text = String(cost_amongo)
 	$"Princess as bombo/Coin/Costprincess".text = String(cost_princess)	
-	$crown/Coin/Costcrown.text = String(cost_crown)
+	$bombo_mario/Coin/Costbombo_mario.text = String(cost_mario)
+	change_button_color()
 	_check_for_usage()
 	
 	
@@ -57,11 +58,70 @@ func _check_for_usage():
 	if Global.settings["skin_crown"] == 1:
 		$crown/Button_crown.text = "Use"
 	else:
-		if Global.settings["coins"] < cost_crown:
+		if Global.settings["skin_crown"] == 0:
 			$crown/Button_crown.disabled = true
 		else: 
 			$crown/Button_crown.disabled = false
-
+	if Global.settings["skin_mario"] == 1:
+		$bombo_mario/Button_bombo_mario.text = "Use"
+	else:
+		if Global.settings["coins"] < cost_mario:
+			$bombo_mario/Button_bombo_mario.disabled = true
+		else: 
+			$bombo_mario/Button_bombo_mario.disabled = false		
+			
+			
+		
+func change_button_color():
+	if Global.sprite_texture == diver:
+		$Diver/Button_diver.set_self_modulate("00910c")
+		$crown/Button_crown.set_self_modulate("ffffff")
+		$bombo_mario/Button_bombo_mario.set_self_modulate("ffffff")
+		$"Princess as bombo/Button_princess_bombo".set_self_modulate("ffffff")
+		$amongo/Button_amongo.set_self_modulate("ffffff")
+		$Use_default_skin.set_self_modulate("ffffff")
+	if Global.sprite_texture == crown:
+		$Diver/Button_diver.set_self_modulate("ffffff")
+		$crown/Button_crown.set_self_modulate("00910c")
+		$bombo_mario/Button_bombo_mario.set_self_modulate("ffffff")
+		$"Princess as bombo/Button_princess_bombo".set_self_modulate("ffffff")
+		$amongo/Button_amongo.set_self_modulate("ffffff")
+		$Use_default_skin.set_self_modulate("ffffff")
+	if Global.sprite_texture == bombo_mario:
+		$Diver/Button_diver.set_self_modulate("ffffff")
+		$crown/Button_crown.set_self_modulate("ffffff")
+		$bombo_mario/Button_bombo_mario.set_self_modulate("00910c")
+		$"Princess as bombo/Button_princess_bombo".set_self_modulate("ffffff")
+		$amongo/Button_amongo.set_self_modulate("ffffff")
+		$Use_default_skin.set_self_modulate("ffffff")
+	if Global.sprite_texture == princess_crown:
+		$Diver/Button_diver.set_self_modulate("ffffff")
+		$crown/Button_crown.set_self_modulate("ffffff")
+		$bombo_mario/Button_bombo_mario.set_self_modulate("ffffff")
+		$"Princess as bombo/Button_princess_bombo".set_self_modulate("00910c")
+		$amongo/Button_amongo.set_self_modulate("ffffff")
+		$Use_default_skin.set_self_modulate("ffffff") 
+	if Global.sprite_texture == amongusfinalskin:
+		$Diver/Button_diver.set_self_modulate("ffffff")
+		$crown/Button_crown.set_self_modulate("ffffff")
+		$bombo_mario/Button_bombo_mario.set_self_modulate("ffffff")
+		$"Princess as bombo/Button_princess_bombo".set_self_modulate("ffffff")
+		$amongo/Button_amongo.set_self_modulate("00910c")
+		$Use_default_skin.set_self_modulate("ffffff")
+	if Global.sprite_texture == bombo:
+		$Diver/Button_diver.set_self_modulate("ffffff")
+		$crown/Button_crown.set_self_modulate("ffffff")
+		$bombo_mario/Button_bombo_mario.set_self_modulate("ffffff")
+		$"Princess as bombo/Button_princess_bombo".set_self_modulate("ffffff")
+		$amongo/Button_amongo.set_self_modulate("ffffff")
+		$Use_default_skin.set_self_modulate("00910c")
+			
+func _on_Use_default_skin_pressed():
+	Global.sprite_texture = bombo
+	Global.player.change_sprite(bombo)
+	change_button_color()
+	
+	
 func _on_Go_Back_pressed():
 	Global.save()
 	get_tree().change_scene("res://MainMenu.tscn")
@@ -71,6 +131,7 @@ func _on_Button_diver_pressed():
 	if Global.settings["skin_diver"] == 1:
 		Global.sprite_texture = diver
 		Global.player.change_sprite(diver)
+		change_button_color()
 	else: 
 		if Global.settings["coins"] >= cost_diver:
 			Global.settings["coins"] = Global.settings["coins"] - cost_diver
@@ -80,6 +141,7 @@ func _on_Button_diver_pressed():
 			Global.settings["skin_diver"] = 1
 			$Diver/Button_diver.text = "Use"
 			_check_for_usage()
+			change_button_color()
 		else:
 			pass
 
@@ -88,6 +150,7 @@ func _on_Button_amongo_pressed():
 	if Global.settings["skin_amongo"] == 1:
 		Global.sprite_texture = amongusfinalskin
 		Global.player.change_sprite(amongusfinalskin)
+		change_button_color()
 	else:
 		if Global.settings["coins"] >= cost_amongo:
 			Global.settings["coins"] = Global.settings["coins"] - cost_amongo
@@ -97,6 +160,7 @@ func _on_Button_amongo_pressed():
 			Global.settings["skin_amongo"] = 1
 			$amongo/Button_amongo.text = "Use"
 			_check_for_usage()
+			change_button_color()
 		else:
 			pass
 
@@ -104,23 +168,17 @@ func _on_Button_crown_pressed():
 	if Global.settings["skin_crown"] == 1:
 		Global.sprite_texture = crown
 		Global.player.change_sprite(crown)
+		_check_for_usage()
+		change_button_color()
 	else:
-		if Global.settings["coins"] >= cost_crown:
-			Global.settings["coins"] = Global.settings["coins"] - cost_crown
-			Global.sprite_texture = crown
-			Global.player.change_sprite(crown)
-			$Moneycoin/Moneylabel.text = String(Global.settings["coins"])
-			Global.settings["skin_crown"] = 1
-			$crown/Button_crown.text = "Use"
-			_check_for_usage()
-		else:
-			pass
+		pass
 
 
 func _on_Button_princess_bombo_pressed():
 	if Global.settings["skin_princess"] == 1:
 			Global.sprite_texture = princess_crown
 			Global.player.change_sprite(princess_crown)
+			change_button_color()
 	else:
 		if Global.settings["coins"] >= cost_princess:
 			Global.settings["coins"] = Global.settings["coins"] - cost_princess
@@ -130,5 +188,25 @@ func _on_Button_princess_bombo_pressed():
 			Global.settings["skin_princess"] = 1
 			$"Princess as bombo/Button_princess_bombo".text = "Use"
 			_check_for_usage()
+			change_button_color()
+		else:
+			pass
+
+
+func _on_Button_bombo_mario_pressed():
+	if Global.settings["skin_mario"] == 1:
+			Global.sprite_texture = bombo_mario
+			Global.player.change_sprite(bombo_mario)
+			change_button_color()
+	else:
+		if Global.settings["coins"] >= cost_mario:
+			Global.settings["coins"] = Global.settings["coins"] - cost_mario
+			Global.sprite_texture = bombo_mario
+			Global.player.change_sprite(bombo_mario)
+			$Moneycoin/Moneylabel.text = String(Global.settings["coins"])
+			Global.settings["skin_mario"] = 1
+			$bombo_mario/Button_bombo_mario.text = "Use"
+			_check_for_usage()
+			change_button_color()
 		else:
 			pass
