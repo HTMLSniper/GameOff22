@@ -65,7 +65,7 @@ func _ready() -> void:
 	circle_light.energy = lightintensity_circle
 	change_sprite(Global.sprite_texture)
 	Global.connect("sound_changed_live", self, "sound_changed")
-	sound_changed()
+	#sound_changed()
 
 func _physics_process(delta: float) -> void:
 	handle_Backpack()
