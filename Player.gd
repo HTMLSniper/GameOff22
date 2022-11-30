@@ -24,7 +24,7 @@ var dash_length = .15
 var falling = false
 var lying = false
 var dash_start_point = Vector2.ZERO
-var message = true
+var message = false
 
 enum{
 	IDLE,
@@ -400,7 +400,6 @@ func sound_changed():
 
 func _on_LyingTimer_timeout() -> void:
 	lying = false
-
 
 func _on_TimerBackpack_timeout() -> void:
 	update_left()
