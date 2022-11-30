@@ -103,6 +103,8 @@ func change_color_for_depth(player, delta):
 func won():
 	gamefinished.display()
 	hud.visible = false
+	Global.settings["skin_crown"] = 1 
+	Global.save()
 	canvas_modulate.visible = false
 	debug_overlay.visible = false
 	gamefinished.visible = true

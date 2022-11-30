@@ -94,6 +94,7 @@ var settings = {
 	"skin_princess" : 0,
 	"skin_diver" : 0,
 	"skin_amongo" : 0,
+	"skin_mario" : 0,
 }
 func save():
 	var file = File.new()
