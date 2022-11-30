@@ -1306,6 +1306,7 @@ flat = true
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
+frame = 1
 playing = true
 
 [node name="Costbombo_mario" type="Label" parent="bombo_mario/Coin"]
