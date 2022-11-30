@@ -25,7 +25,6 @@ func _ready() -> void:
 	sprite.scale.y = scale_factor
 	#$Label.text = "Start: " + String(start_offset)
 
-
 func _process(delta: float) -> void:
 	sprite.play("move")
 	var rand_speed = rand_range(speed - 10,speed + 20)
