@@ -20,6 +20,8 @@ var time_played = 0
 var goal : Node2D
 var sprite_texture = bombo
 var coins = []
+var cheats_active = false
+var cheats_used = false
 
 var settings = {
 	"coins" : 0,
@@ -54,6 +56,7 @@ func save_to_file():
 	save_data.store_var(falls)
 	save_data.store_var(time_played)
 	save_data.store_var(coins)
+	save_data.store_var(cheats_used)
 	save_data.close()
 
 func load_from_file():
@@ -69,6 +72,7 @@ func load_from_file():
 		falls = save_data.get_var()
 		time_played = save_data.get_var()
 		coins = save_data.get_var()
+		cheats_used = save_data.get_var()
 		save_data.close() 
 
 func change_coins(new_number):
@@ -85,6 +89,7 @@ func reset_everything():
 	falls = 0
 	time_played = 0
 	paused = false
+	cheats_used = false
 
 func change_music(value):
 	music_vol = value
@@ -111,8 +116,9 @@ func save():
 	file.store_var(sound_vol)
 	file.store_var(music_on)
 	file.store_var(sound_on)
+	file.store_var(cheats_active)
 	file.close()
-	
+
 func load():
 	var file = File.new()
 	if file.file_exists(SKIN_FILE_NAME):
@@ -123,6 +129,7 @@ func load():
 		sound_vol = file.get_var()
 		music_on = file.get_var()
 		sound_on = file.get_var()
+		cheats_active = file.get_var() or false
 		file.close()
 		if typeof(data) == TYPE_DICTIONARY:
 			settings = data

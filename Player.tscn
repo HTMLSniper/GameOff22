@@ -19,8 +19,8 @@
 [ext_resource path="res://assets/EquipmentPro.ttf" type="DynamicFontData" id=17]
 [ext_resource path="res://assets/textfield.png" type="Texture" id=18]
 [ext_resource path="res://assets/wilhelm_scream_short.wav" type="AudioStream" id=19]
-[ext_resource path="res://assets/lying_sound.wav" type="AudioStream" id=20]
-[ext_resource path="res://assets/jump_sound.wav" type="AudioStream" id=21]
+[ext_resource path="res://assets/lying_sound2.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/jump_sound2.wav" type="AudioStream" id=21]
 [ext_resource path="res://assets/bounce_sound.wav" type="AudioStream" id=22]
 [ext_resource path="res://assets/landing_sound.wav" type="AudioStream" id=23]
 

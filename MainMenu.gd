@@ -34,9 +34,6 @@ func _on_Options_pressed() -> void:
 	tween.start()
 
 func _on_Quit_pressed() -> void:
-	click_sound.pitch_scale = rand_range(0.5,2.5)
-	sound_changed()
-	click_sound.play()
 	get_tree().quit()
 
 func music_changed():

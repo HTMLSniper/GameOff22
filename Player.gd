@@ -67,6 +67,13 @@ func _ready() -> void:
 	sound_changed()
 
 func _physics_process(delta: float) -> void:
+	if add_debug_movement(delta):
+		print("cheat")
+		state = IDLE
+		velocity = Vector2.ZERO
+		animation.play("Idle_Left")
+		sprite.rotation = 0
+		return
 	handle_Backpack()
 	match state:
 		IDLE:
@@ -89,8 +96,6 @@ func idle_state(delta):
 			#pass
 		#else:
 			#handle_Backpack()
-	if add_debug_movement(delta):
-		return
 	sprite.rotation = 0
 	indicator.frame = 0
 	update_left()
@@ -342,7 +347,8 @@ func is_slope():
 	return false
 
 func add_debug_movement(delta):
-	if Input.is_action_pressed("up"):
+	if Input.is_action_pressed("cheatmode") and Global.cheats_active:
+		Global.cheats_used = true
 		position = position.move_toward(get_global_mouse_position(), delta * 300)
 		turn_spotlight()
 		return true

@@ -46,15 +46,16 @@ func _process(delta: float) -> void:
 		shadow_left.visible = false
 	else:
 		pass
-	make_ink.global_position.x = 0
-	make_ink.global_position.y = Global.player.position.y
-	if ink_on == true:
-		if sprite.global_position.distance_to(Global.player.position) < maxdistance_to_sprite:
-			if timer.is_stopped() == true:
-				make_ink.set_frame(0)
-				timer.start()
-			make_ink.visible = true
-
+#	make_ink.global_position.x = 0
+#	make_ink.global_position.y = Global.player.position.y
+#	if ink_on == true:
+#		if sprite.global_position.distance_to(Global.player.position) < maxdistance_to_sprite:
+#			if timer.is_stopped() == true:
+#				make_ink.set_frame(0)
+#				timer.start()
+#			make_ink.visible = true
+#
 func _on_Timer_timeout():
-	make_ink.visible = false
-	make_ink.set_frame(0)
+	pass
+#	make_ink.visible = false
+#	make_ink.set_frame(0)
