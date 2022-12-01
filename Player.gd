@@ -380,6 +380,7 @@ func change_sprite(path):
 	sprite.set_texture(path)
 
 func sound_changed():
+	return
 	if Global.sound_on:
 		dashSound.volume_db = Global.sound_vol - 10
 		landingSound.volume_db = Global.sound_vol - 10
