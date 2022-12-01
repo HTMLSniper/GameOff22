@@ -3179,6 +3179,32 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Octopusses" type="Node" parent="."]
+
+[node name="Octupus" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 159, 309 )
+
+[node name="Octupus2" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 364, 671 )
+
+[node name="Octupus3" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 188, 1369 )
+
+[node name="Octupus4" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 487, 1917 )
+
+[node name="Octupus5" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 405, 2308 )
+
+[node name="Octupus6" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 151, 3686 )
+
+[node name="Octupus7" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 202, 4203 )
+
+[node name="Octupus8" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 159, 5359 )
+
 [node name="Jellys" type="Node" parent="."]
 
 [node name="Jelly" parent="Jellys" instance=ExtResource( 21 )]
@@ -3697,6 +3723,115 @@ rect_scale = Vector2( 0.7, 0.7 )
 custom_fonts/font = SubResource( 346 )
 text = "[Long jump]"
 
+
+[node name="Crabbies" type="Node" parent="."]
+
+[node name="Crabby" parent="Crabbies" instance=ExtResource( 26 )]
+position = Vector2( 408, 736 )
+
+[node name="Crabby2" parent="Crabbies" instance=ExtResource( 26 )]
+position = Vector2( 197, 992 )
+
+[node name="Crabby3" parent="Crabbies" instance=ExtResource( 26 )]
+position = Vector2( 331, 2736 )
+
+[node name="Crabby4" parent="Crabbies" instance=ExtResource( 26 )]
+position = Vector2( 252, 3071 )
+
+[node name="Crabby5" parent="Crabbies" instance=ExtResource( 26 )]
+position = Vector2( 358, 3984 )
+
+[node name="Crabby6" parent="Crabbies" instance=ExtResource( 26 )]
+position = Vector2( 160, 4337 )
+
+[node name="Crabby7" parent="Crabbies" instance=ExtResource( 26 )]
+position = Vector2( 476, 4800 )
+
+[node name="Crabby8" parent="Crabbies" instance=ExtResource( 26 )]
+position = Vector2( 174, 4865 )
+
+[node name="Fishes" type="Node" parent="."]
+
+[node name="Fish2" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 184, 824 )
+
+[node name="Fish" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 428, 442 )
+
+[node name="Fish3" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 370, 1541 )
+
+[node name="Fish4" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 162, 2097 )
+
+[node name="Fish5" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 200, 2639 )
+
+[node name="Fish6" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 246, 3542 )
+
+[node name="Fish7" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 205, 4491 )
+
+[node name="Fish8" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 234, 3517 )
+
+[node name="Fish9" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 288, 3527 )
+
+[node name="Fish10" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 201, 3533 )
+
+[node name="Fish11" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 343, 1519 )
+
+[node name="Fish12" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 416, 1521 )
+
+[node name="Fish13" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 377, 1498 )
+
+[node name="Fish14" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 462, 421 )
+
+[node name="Fish15" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 409, 409 )
+
+[node name="Fish16" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 143, 814 )
+
+[node name="Fish17" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 199, 802 )
+
+[node name="Fish18" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 121, 795 )
+
+[node name="Fish19" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 148, 833 )
+
+[node name="Fish20" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 136, 2081 )
+
+[node name="Fish21" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 218, 2623 )
+
+[node name="Fish22" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 162, 2615 )
+
+[node name="Fish23" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 157, 2634 )
+
+[node name="Fish24" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 195, 4510 )
+
+[node name="Fish25" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 155, 4492 )
+
+[node name="Fish26" parent="Fishes" instance=ExtResource( 24 )]
+position = Vector2( 210, 2073 )
+
+
 [connection signal="pressed" from="CanvasLayer/GameFinished/Menu" to="CanvasLayer/GameFinished" method="_on_Menu_pressed"]
+
 [connection signal="pressed" from="CanvasLayer/Pause/Resume" to="CanvasLayer/Pause" method="_on_Resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/Pause/Menu" to="CanvasLayer/Pause" method="_on_Menu_pressed"]

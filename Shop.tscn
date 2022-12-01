@@ -1370,6 +1370,7 @@ flat = true
 position = Vector2( 320, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 133 )
+frame = 1
 playing = true
 
 [node name="Button_diver" type="Button" parent="Diver"]
@@ -1389,6 +1390,7 @@ flat = true
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
+frame = 2
 playing = true
 
 [node name="Costdiver" type="Label" parent="Diver/Coin"]
@@ -1404,7 +1406,7 @@ text = "5"
 position = Vector2( 200, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 149 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Button_princess_bombo" type="Button" parent="Princess as bombo"]
@@ -1426,7 +1428,7 @@ icon_align = 1
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Costprincess" type="Label" parent="Princess as bombo/Coin"]
@@ -1478,7 +1480,7 @@ text = "5"
 position = Vector2( 440, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 139 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Button_amongo" type="Button" parent="amongo"]
@@ -1498,7 +1500,7 @@ flat = true
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Costamongo" type="Label" parent="amongo/Coin"]
@@ -1525,8 +1527,14 @@ centered = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 
+
+[node name="Octupus" parent="Animals" instance=ExtResource( 21 )]
+position = Vector2( 173, 305 )
+ink_on = false
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )
+
 
 [connection signal="pressed" from="Use_default_skin" to="." method="_on_Use_default_skin_pressed"]
 [connection signal="pressed" from="Go Back" to="." method="_on_Go_Back_pressed"]

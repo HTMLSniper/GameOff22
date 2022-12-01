@@ -1274,8 +1274,21 @@ text = "Restart"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ContinueLayer"]
 stream = ExtResource( 22 )
 
+
+[node name="Jelly3" parent="Animals" instance=ExtResource( 21 )]
+position = Vector2( 502, 142 )
+
+[node name="Octupus" parent="Animals" instance=ExtResource( 18 )]
+position = Vector2( 312, 98 )
+ink_on = false
+
+[node name="Octupus2" parent="Animals" instance=ExtResource( 18 )]
+position = Vector2( 507, 304 )
+ink_on = false
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 22 )
+stream = ExtResource( 23 )
+
 
 [connection signal="pressed" from="Shop" to="." method="_on_Shop_pressed"]
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
