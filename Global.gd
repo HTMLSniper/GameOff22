@@ -54,10 +54,6 @@ func save_to_file():
 	save_data.store_var(falls)
 	save_data.store_var(time_played)
 	save_data.store_var(coins)
-	save_data.store_var(music_vol)
-	save_data.store_var(sound_vol)
-	save_data.store_var(music_on)
-	save_data.store_var(sound_on)
 	save_data.close()
 
 func load_from_file():
@@ -73,10 +69,6 @@ func load_from_file():
 		falls = save_data.get_var()
 		time_played = save_data.get_var()
 		coins = save_data.get_var()
-		music_vol = save_data.get_var()
-		sound_vol = save_data.get_var()
-		music_on = save_data.get_var()
-		sound_on = save_data.get_var()
 		save_data.close() 
 
 func change_coins(new_number):
@@ -114,8 +106,11 @@ func change_sound(value):
 func save():
 	var file = File.new()
 	file.open(SKIN_FILE_NAME, File.WRITE)
-	#file.store_string(to_json(settings))
 	file.store_var(settings)
+	file.store_var(music_vol)
+	file.store_var(sound_vol)
+	file.store_var(music_on)
+	file.store_var(sound_on)
 	file.close()
 	
 func load():
@@ -124,6 +119,10 @@ func load():
 		file.open(SKIN_FILE_NAME, File.READ)
 		#var data = parse_json(file.get_as_text()
 		var data = file.get_var()
+		music_vol = file.get_var()
+		sound_vol = file.get_var()
+		music_on = file.get_var()
+		sound_on = file.get_var()
 		file.close()
 		if typeof(data) == TYPE_DICTIONARY:
 			settings = data

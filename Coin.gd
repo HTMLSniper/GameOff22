@@ -16,6 +16,7 @@ func _ready() -> void:
 
 func _on_Coin_body_entered(body: Node) -> void:
 	if body.has_method("get_coin") and not collected:
+		sound_changed()
 		collected = true
 		pickup_sound.pitch_scale = rand_range(0.8,1.2)
 		animation.play("coin_found")
@@ -24,6 +25,6 @@ func _on_Coin_body_entered(body: Node) -> void:
 
 func sound_changed():
 	if Global.sound_on:
-		pickup_sound.volume_db = Global.sound_volume - 15
+		pickup_sound.volume_db = Global.sound_vol - 15
 	else:
 		pickup_sound.volume_db = -80

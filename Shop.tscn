@@ -1348,7 +1348,7 @@ text = "0"
 position = Vector2( 88, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 144 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="Button_crown" type="Button" parent="crown"]
@@ -1368,7 +1368,6 @@ flat = true
 position = Vector2( 320, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 133 )
-frame = 1
 playing = true
 
 [node name="Button_diver" type="Button" parent="Diver"]
@@ -1404,7 +1403,7 @@ text = "5"
 position = Vector2( 200, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 149 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Button_princess_bombo" type="Button" parent="Princess as bombo"]
@@ -1442,7 +1441,7 @@ text = "5"
 position = Vector2( 552, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 159 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="Button_bombo_mario" type="Button" parent="bombo_mario"]
@@ -1477,7 +1476,7 @@ text = "5"
 position = Vector2( 440, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 139 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Button_amongo" type="Button" parent="amongo"]

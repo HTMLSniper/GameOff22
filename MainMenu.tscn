@@ -1196,6 +1196,8 @@ margin_left = 215.0
 margin_top = 175.0
 margin_right = 415.0
 margin_bottom = 191.0
+min_value = -50.0
+max_value = 50.0
 value = 50.0
 
 [node name="SoundSlider" type="HSlider" parent="OptionLayer"]
@@ -1203,6 +1205,8 @@ margin_left = 215.0
 margin_top = 223.0
 margin_right = 415.0
 margin_bottom = 239.0
+min_value = -50.0
+max_value = 50.0
 value = 50.0
 
 [node name="Tween" type="Tween" parent="OptionLayer"]
