@@ -88,7 +88,7 @@ func reset_everything():
 
 func change_music(value):
 	music_vol = value
-	if value == 0:
+	if value == -50:
 		music_on = false
 	else:
 		music_on = true
@@ -96,7 +96,7 @@ func change_music(value):
 
 func change_sound(value):
 	sound_vol = value
-	if value == 0:
+	if value == -50:
 		sound_on = false
 	else:
 		sound_on = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=169 format=2]
+[gd_scene load_steps=170 format=2]
 
 [ext_resource path="res://assets/EquipmentPro.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/WaterAutoTile.png" type="Texture" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Crabby.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Fish.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Jelly.tscn" type="PackedScene" id=24]
+[ext_resource path="res://assets/button_press.wav" type="AudioStream" id=25]
 
 [sub_resource type="ParticlesMaterial" id=124]
 lifetime_randomness = 0.13
@@ -1334,6 +1335,7 @@ lightintensity_circle = 0.2
 position = Vector2( 248, 331 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 153 )
+frame = 1
 playing = true
 
 [node name="Moneylabel" type="Label" parent="Moneycoin"]
@@ -1387,7 +1389,6 @@ flat = true
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
-frame = 2
 playing = true
 
 [node name="Costdiver" type="Label" parent="Diver/Coin"]
@@ -1425,7 +1426,7 @@ icon_align = 1
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Costprincess" type="Label" parent="Princess as bombo/Coin"]
@@ -1461,6 +1462,7 @@ flat = true
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
+frame = 1
 playing = true
 
 [node name="Costbombo_mario" type="Label" parent="bombo_mario/Coin"]
@@ -1496,7 +1498,7 @@ flat = true
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Costamongo" type="Label" parent="amongo/Coin"]
@@ -1522,6 +1524,9 @@ texture = ExtResource( 6 )
 centered = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 25 )
 
 [connection signal="pressed" from="Use_default_skin" to="." method="_on_Use_default_skin_pressed"]
 [connection signal="pressed" from="Go Back" to="." method="_on_Go_Back_pressed"]

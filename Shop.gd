@@ -1,16 +1,15 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var bombo_mario = preload("res://assets/bombo_mario.png")
 var bombo = preload("res://assets/bombo.png")
 var diver = preload("res://assets/diver.png")
 var princess_crown = preload("res://assets/bombo_as_princess.png")
 var crown = preload("res://assets/bombo_crowned.png")
 var amongusfinalskin = preload("res://assets/AmongusFinalSkin.png")
-# Called when the node enters the scene tree for the first time.
+
+onready var click_sound = $AudioStreamPlayer
+
 var cost_amongo = 4
 var cost_princess = 3
 var cost_diver = 3
@@ -27,6 +26,8 @@ func _ready():
 	$bombo_mario/Coin/Costbombo_mario.text = String(cost_mario)
 	change_button_color()
 	_check_for_usage()
+	Global.connect("sound_changed_live", self, "sound_changed")
+	Global.connect("music_changed_live", self, "music_changed")
 	
 	
 func _check_for_usage():
@@ -115,19 +116,36 @@ func change_button_color():
 		$"Princess as bombo/Button_princess_bombo".set_self_modulate("ffffff")
 		$amongo/Button_amongo.set_self_modulate("ffffff")
 		$Use_default_skin.set_self_modulate("00910c")
-			
+
+func music_changed():
+	pass
+
+func sound_changed():
+	if Global.sound_on:
+		click_sound.volume_db = Global.sound_vol
+	else:
+		click_sound.volume_db = -80
+
 func _on_Use_default_skin_pressed():
+	click_sound.pitch_scale = rand_range(0.5,2.5)
+	sound_changed()
+	click_sound.play()
 	Global.sprite_texture = bombo
 	Global.player.change_sprite(bombo)
 	change_button_color()
 	
 	
 func _on_Go_Back_pressed():
+	click_sound.pitch_scale = rand_range(0.5,2.5)
+	sound_changed()
+	click_sound.play()
 	Global.save()
 	get_tree().change_scene("res://MainMenu.tscn")
 
-
 func _on_Button_diver_pressed():
+	click_sound.pitch_scale = rand_range(0.5,2.5)
+	sound_changed()
+	click_sound.play()
 	if Global.settings["skin_diver"] == 1:
 		Global.sprite_texture = diver
 		Global.player.change_sprite(diver)
@@ -145,8 +163,10 @@ func _on_Button_diver_pressed():
 		else:
 			pass
 
-
 func _on_Button_amongo_pressed():
+	click_sound.pitch_scale = rand_range(0.5,2.5)
+	sound_changed()
+	click_sound.play()
 	if Global.settings["skin_amongo"] == 1:
 		Global.sprite_texture = amongusfinalskin
 		Global.player.change_sprite(amongusfinalskin)
@@ -165,6 +185,9 @@ func _on_Button_amongo_pressed():
 			pass
 
 func _on_Button_crown_pressed():
+	click_sound.pitch_scale = rand_range(0.5,2.5)
+	sound_changed()
+	click_sound.play()
 	if Global.settings["skin_crown"] == 1:
 		Global.sprite_texture = crown
 		Global.player.change_sprite(crown)
@@ -173,8 +196,10 @@ func _on_Button_crown_pressed():
 	else:
 		pass
 
-
 func _on_Button_princess_bombo_pressed():
+	click_sound.pitch_scale = rand_range(0.5,2.5)
+	sound_changed()
+	click_sound.play()
 	if Global.settings["skin_princess"] == 1:
 			Global.sprite_texture = princess_crown
 			Global.player.change_sprite(princess_crown)
@@ -192,8 +217,10 @@ func _on_Button_princess_bombo_pressed():
 		else:
 			pass
 
-
 func _on_Button_bombo_mario_pressed():
+	click_sound.pitch_scale = rand_range(0.5,2.5)
+	sound_changed()
+	click_sound.play()
 	if Global.settings["skin_mario"] == 1:
 			Global.sprite_texture = bombo_mario
 			Global.player.change_sprite(bombo_mario)

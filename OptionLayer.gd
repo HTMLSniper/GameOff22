@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+onready var click_sound = $AudioStreamPlayer
+
 
 func _ready() -> void:
 	Global.load()
@@ -17,9 +19,17 @@ func _on_SoundSlider_value_changed(value: float) -> void:
 
 func _on_Back_pressed() -> void:
 	Global.save()
+	click_sound.pitch_scale = rand_range(0.5,2.5)
+	sound_changed()
+	click_sound.play()
 	var tween = $Tween
 	tween.interpolate_property(self, "scale:y", 1.0,0.0,0.5,3,1)
 	tween.interpolate_property(self, "offset:y", 0.0,100.0,0.5,3,1)
 	tween.start()
 	#visible = false
 
+func sound_changed():
+	if Global.sound_on:
+		click_sound.volume_db = Global.sound_vol
+	else:
+		click_sound.volume_db = -80
