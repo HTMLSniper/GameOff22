@@ -33,8 +33,8 @@ var settings = {
 	"skin_mario" : 0,
 }
 
-var music_vol : float = 50.0
-var sound_vol : float = 50.0
+var music_vol : float = 0.0
+var sound_vol : float = 0.0
 var music_on : bool = true
 var sound_on : bool = false
 

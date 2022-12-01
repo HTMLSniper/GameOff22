@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Dash.gd" type="Script" id=1]
-[ext_resource path="res://assets/dash_sound.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/dash_sound4.wav" type="AudioStream" id=2]
 
 [node name="Dash" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,7 +15,6 @@ wait_time = 0.03
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 volume_db = -9.354
-pitch_scale = 1.52
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="GhostTimer" to="." method="_on_GhostTimer_timeout"]

@@ -68,7 +68,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if add_debug_movement(delta):
-		print("cheat")
 		state = IDLE
 		velocity = Vector2.ZERO
 		animation.play("Idle_Left")
@@ -190,7 +189,7 @@ func flying_state(delta):
 		falling = true
 		Global.falls += 1
 		state = FALLING
-		fallingSound.pitch_scale = rand_range(0.5,1.2)
+		fallingSound.pitch_scale = rand_range(0.9,1.2)
 		sound_changed()
 		fallingSound.play()
 	last_vel = velocity
@@ -287,9 +286,14 @@ func reduce_vel(delta, vel):
 			vel.x = 0
 			is_jumping = false
 			state = LYING
-			lyingSound.pitch_scale = rand_range(0.8,1.2)
+			var pitch = rand_range(0.8,1.2)
+			lyingSound.pitch_scale = pitch
 			sound_changed()
 			lyingSound.play()
+			landingSound.pitch_scale = pitch
+			landingSound.play()
+			bounceSound.pitch_scale = pitch
+			bounceSound.play()
 			sprite.rotation = 0
 			lying = true
 			Shake.shake_cam(0.5,0.2)
@@ -410,7 +414,7 @@ func sound_changed():
 		landingSound.volume_db = Global.sound_vol - 10
 		fallingSound.volume_db = Global.sound_vol - 10
 		bounceSound.volume_db = Global.sound_vol - 10
-		lyingSound.volume_db = Global.sound_vol - 15
+		lyingSound.volume_db = Global.sound_vol - 10
 		jumpSound.volume_db = Global.sound_vol - 15
 	else:
 		landingSound.volume_db = -80

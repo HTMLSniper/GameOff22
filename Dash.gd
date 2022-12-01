@@ -10,7 +10,7 @@ var stopped = false
 var sprite
 
 func start_dash(sprite_dh, dur):
-	dashSound.pitch_scale = rand_range(0.7,1.5)
+	dashSound.pitch_scale = rand_range(0.8,1.2)
 	sound_changed()
 	dashSound.play()
 	self.sprite = sprite_dh

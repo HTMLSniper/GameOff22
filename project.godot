@@ -11,8 +11,9 @@ config_version=4
 [application]
 
 config/name="DoubleDashing"
+config/description="A foddian style rage game, but underwater"
 run/main_scene="res://MainMenu.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/Icon.png"
 
 [autoload]
 

@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var click_sound = $AudioStreamPlayer
+onready var music = $MusicStreamPlayer
 
 func _ready() -> void:
 	$Camera2D.current = true
@@ -8,6 +9,7 @@ func _ready() -> void:
 	Global.load()
 	Global.connect("sound_changed_live", self, "sound_changed")
 	Global.connect("music_changed_live", self, "music_changed")
+	music.play()
 
 
 func _on_Play_pressed() -> void:
@@ -20,6 +22,7 @@ func _on_Play_pressed() -> void:
 	if Global.time_played > 0:
 		$ContinueLayer.visible = true
 	else:
+		music.stop()
 		get_tree().change_scene("res://World.tscn")
 
 
@@ -37,7 +40,10 @@ func _on_Quit_pressed() -> void:
 	get_tree().quit()
 
 func music_changed():
-	pass
+	if Global.music_on:
+		music.volume_db = Global.music_vol - 25
+	else:
+		music.volume_db = -80
 
 func sound_changed():
 	if Global.sound_on:
@@ -49,3 +55,7 @@ func _on_Shop_pressed():
 	click_sound.pitch_scale = rand_range(0.5,2.5)
 	click_sound.play()
 	get_tree().change_scene("res://Shop.tscn")
+
+
+func _on_MusicStreamPlayer_finished() -> void:
+	music.play()
