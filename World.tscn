@@ -3161,6 +3161,32 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Octopusses" type="Node" parent="."]
+
+[node name="Octupus" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 159, 309 )
+
+[node name="Octupus2" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 364, 671 )
+
+[node name="Octupus3" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 188, 1369 )
+
+[node name="Octupus4" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 487, 1917 )
+
+[node name="Octupus5" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 405, 2308 )
+
+[node name="Octupus6" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 151, 3686 )
+
+[node name="Octupus7" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 202, 4203 )
+
+[node name="Octupus8" parent="Octopusses" instance=ExtResource( 25 )]
+position = Vector2( 159, 5359 )
+
 [node name="Jellys" type="Node" parent="."]
 
 [node name="Jelly" parent="Jellys" instance=ExtResource( 21 )]
@@ -3516,32 +3542,6 @@ margin_bottom = 2744.0
 rect_scale = Vector2( 0.7, 0.7 )
 custom_fonts/font = SubResource( 346 )
 text = "[Long jump]"
-
-[node name="Octopusses" type="Node" parent="."]
-
-[node name="Octupus" parent="Octopusses" instance=ExtResource( 25 )]
-position = Vector2( 159, 309 )
-
-[node name="Octupus2" parent="Octopusses" instance=ExtResource( 25 )]
-position = Vector2( 364, 671 )
-
-[node name="Octupus3" parent="Octopusses" instance=ExtResource( 25 )]
-position = Vector2( 188, 1369 )
-
-[node name="Octupus4" parent="Octopusses" instance=ExtResource( 25 )]
-position = Vector2( 487, 1917 )
-
-[node name="Octupus5" parent="Octopusses" instance=ExtResource( 25 )]
-position = Vector2( 405, 2308 )
-
-[node name="Octupus6" parent="Octopusses" instance=ExtResource( 25 )]
-position = Vector2( 151, 3686 )
-
-[node name="Octupus7" parent="Octopusses" instance=ExtResource( 25 )]
-position = Vector2( 202, 4203 )
-
-[node name="Octupus8" parent="Octopusses" instance=ExtResource( 25 )]
-position = Vector2( 159, 5359 )
 
 [node name="Crabbies" type="Node" parent="."]
 

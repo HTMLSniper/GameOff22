@@ -1248,9 +1248,11 @@ position = Vector2( 502, 142 )
 
 [node name="Octupus" parent="Animals" instance=ExtResource( 18 )]
 position = Vector2( 312, 98 )
+ink_on = false
 
 [node name="Octupus2" parent="Animals" instance=ExtResource( 18 )]
 position = Vector2( 507, 304 )
+ink_on = false
 
 [connection signal="pressed" from="Shop" to="." method="_on_Shop_pressed"]
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
