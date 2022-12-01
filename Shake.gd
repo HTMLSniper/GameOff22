@@ -16,7 +16,7 @@ func _ready() -> void:
 	noise.period = 20
 	noise.persistence = 0.8
 
-func shake(intensity, duration):
+func shake_cam(intensity, duration):
 	camera_shake_intensity = intensity
 	camera_shake_duration = duration
 	shake = true

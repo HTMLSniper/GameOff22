@@ -127,7 +127,7 @@ func jumping_state(delta):
 			dash_start_point = position
 			dash.start_dash(sprite,dash_length)
 			do_jump()
-			Shake.shake(0.4,0.1)
+			Shake.shake_cam(0.4,0.1)
 			state = DASHING
 			indicator.frame = 0
 			if left:
@@ -271,7 +271,7 @@ func reduce_vel(delta, vel):
 			state = LYING
 			sprite.rotation = 0
 			lying = true
-			Shake.shake(0.5,0.2)
+			Shake.shake_cam(0.5,0.2)
 			floor_particles(20,0.7)
 			$LyingTimer.start()
 		elif state == FLYING:

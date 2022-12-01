@@ -10,7 +10,7 @@ func _ready() -> void:
 	if number >= len(Global.coins):
 		Global.coins.append(collected)
 	if Global.coins[number]:
-		visible = false
+		queue_free()
 
 func _on_Coin_body_entered(body: Node) -> void:
 	if body.has_method("get_coin"):

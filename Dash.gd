@@ -6,8 +6,8 @@ var ghost_scene = preload("res://DashGhost.tscn")
 var stopped = false
 var sprite
 
-func start_dash(sprite, dur):
-	self.sprite = sprite
+func start_dash(sprite_dh, dur):
+	self.sprite = sprite_dh
 	timer.wait_time = dur
 	timer.start()
 	ghostTimer.start()
