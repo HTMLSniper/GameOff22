@@ -10,7 +10,7 @@ var inc = 0
 var speed = 25
 var min_scale_factor = 16
 var scale_factor = 2.5
-var max_scale_factor = 33 # int
+var max_scale_factor = 31 # int
 
 func _ready() -> void:
 	sprite.play("move")
