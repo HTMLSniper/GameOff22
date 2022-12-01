@@ -22,6 +22,7 @@ var sprite_texture = bombo
 var coins = []
 var cheats_active = false
 var cheats_used = false
+var easteregg = false
 
 var settings = {
 	"coins" : 0,
@@ -57,6 +58,7 @@ func save_to_file():
 	save_data.store_var(time_played)
 	save_data.store_var(coins)
 	save_data.store_var(cheats_used)
+	save_data.store_var(easteregg)
 	save_data.close()
 
 func load_from_file():
@@ -73,6 +75,7 @@ func load_from_file():
 		time_played = save_data.get_var()
 		coins = save_data.get_var()
 		cheats_used = save_data.get_var()
+		easteregg = save_data.get_var()
 		save_data.close() 
 
 func change_coins(new_number):

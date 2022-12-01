@@ -15,13 +15,14 @@ func _ready() -> void:
 	Global.load_from_file()
 	Global.player.connect_goal()
 	Shake.set_cam()
-	add_debug_stats()
+	#add_debug_stats()
 	Global.player.fadein()
 
 func _process(delta: float) -> void:
 	change_color_for_depth(Global.player, delta)
 
 func add_debug_stats():
+	debug_overlay.visible = true
 	debug_overlay.add_stat("FPS", Engine, "get_frames_per_second", true)
 	debug_overlay.add_stat("Player position", $Player, "position", false)
 	debug_overlay.add_stat("Player state", $Player, "get_state", true)

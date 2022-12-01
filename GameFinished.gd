@@ -12,6 +12,8 @@ func _ready() -> void:
 
 func display():
 	end_music.play()
+	if Global.cheats_used:
+		$Cheater.visible = true
 	var time_text = "Time: %02dH %02dM %02dS" % [Global.timeh,Global.timem,Global.times]
 	time.text = time_text
 	jumps.text = "Jumps: %5d" % [Global.jumps]

@@ -398,8 +398,8 @@ func connect_goal():
 	var goal = get_parent().find_node("Goal")
 	goal.connect("goal_entered", self, "won")
 
-func get_coin():
-	Global.change_coins(Global.settings["coins"] + 1)
+func get_coin(value):
+	Global.change_coins(Global.settings["coins"] + value)
 	print(Global.settings["coins"])
 
 func change_sprite(path):

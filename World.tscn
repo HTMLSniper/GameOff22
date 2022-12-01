@@ -1,4 +1,4 @@
-[gd_scene load_steps=304 format=2]
+[gd_scene load_steps=317 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -32,6 +32,179 @@
 [ext_resource path="res://assets/coin.png" type="Texture" id=30]
 [ext_resource path="res://assets/button_press2.wav" type="AudioStream" id=31]
 [ext_resource path="res://assets/gigachad_song.wav" type="AudioStream" id=32]
+[ext_resource path="res://Easteregg.gd" type="Script" id=33]
+[ext_resource path="res://assets/sans_skeleton.png" type="Texture" id=34]
+[ext_resource path="res://assets/skeleton.png" type="Texture" id=35]
+[ext_resource path="res://assets/coin_pickup.wav" type="AudioStream" id=36]
+
+[sub_resource type="StreamTexture" id=350]
+load_path = "res://.import/circleLight.png-1991c30e4a91483d842807dd347a26ac.stex"
+
+[sub_resource type="Animation" id=351]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AudioStreamPlayer:stream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 36 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=352]
+resource_name = "coin_found"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -8 ), Vector2( 0, -14 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1.3, 1.3 ), Vector2( 0, 0 ) ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 36 )
+} ],
+"times": PoolRealArray( 0.1 )
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Animation" id=353]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 2 ), Vector2( 0, 1 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=354]
+radius = 5.0
+
+[sub_resource type="StreamTexture" id=355]
+load_path = "res://.import/goldenegg_new.png-802b4f4166b349862efd77b491619372.stex"
 
 [sub_resource type="OccluderPolygon2D" id=76]
 polygon = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -2602,6 +2775,12 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 47/shapes = [  ]
 47/z_index = 0
 
+[sub_resource type="StreamTexture" id=356]
+load_path = "res://.import/missigno.png-751ed7d3bd4b4b96303f8f174a491396.stex"
+
+[sub_resource type="StreamTexture" id=357]
+load_path = "res://.import/crowbar.png-b8b2b02c71495da316d6d032542815e9.stex"
+
 [sub_resource type="TileSet" id=345]
 0/name = "underwater_plants.png 0"
 0/texture = ExtResource( 19 )
@@ -2778,6 +2957,10 @@ size = 64
 font_data = ExtResource( 12 )
 
 [sub_resource type="DynamicFont" id=243]
+size = 64
+font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=349]
 size = 64
 font_data = ExtResource( 12 )
 
@@ -2986,6 +3169,33 @@ normal_map = ExtResource( 22 )
 position = Vector2( 429, 1776 )
 texture = ExtResource( 28 )
 
+[node name="Easteregg" type="Area2D" parent="."]
+position = Vector2( 579, 4044 )
+script = ExtResource( 33 )
+
+[node name="Light2D" type="Light2D" parent="Easteregg"]
+texture = SubResource( 350 )
+texture_scale = 0.2
+energy = 0.3
+shadow_gradient_length = 0.5
+shadow_filter = 2
+shadow_filter_smooth = 10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Easteregg"]
+autoplay = "idle"
+anims/RESET = SubResource( 351 )
+anims/coin_found = SubResource( 352 )
+anims/idle = SubResource( 353 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Easteregg"]
+shape = SubResource( 354 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Easteregg"]
+stream = ExtResource( 36 )
+
+[node name="Sprite" type="Sprite" parent="Easteregg"]
+texture = SubResource( 355 )
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 63 )
 cell_size = Vector2( 16, 16 )
@@ -2997,6 +3207,34 @@ tile_set = SubResource( 64 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 262164, 0, 5, 327700, 0, 131077, 327704, 0, 5, 393221, 0, 196608, 393222, 0, 196609, 393223, 0, 196609, 393224, 0, 196610, 393239, 0, 196608, 393240, 0, 65543, 786457, 0, 5, 786479, 0, 196613, 851993, 0, 8, 851994, 0, 13, 917529, 0, 65548, 917530, 0, 65538, 2818080, 11, 0, 2818081, 15, 0, 2883617, 17, 0, 2883618, 15, 0, 2949154, 17, 0, 3014684, 9, 0, 3014685, 6, 0, 3080220, 10, 0, 7274528, 11, 0, 7274529, 15, 0, 7340036, 15, 0, 7340037, 12, 0, 7340039, 11, 0, 7340040, 16, 0, 7340044, 5, 0, 7340045, 19, 0, 7340049, 15, 0, 7340050, 12, 0, 7340065, 10, 0, 7405571, 15, 0, 7405572, 16, 0, 7405576, 8, 0, 7405581, 17, 0, 7405582, 15, 0, 7405584, 15, 0, 7405585, 16, 0, 7471106, 15, 0, 7471107, 16, 0, 7471118, 10, 0, 7471120, 10, 0, 7536642, 16, 0, 7798818, 20, 0, 8388643, 13, 0, 8847372, 11, 0, 8847373, 12, 0, 8912909, 8, 0, 9240603, 13, 0, 9568272, 5, 0, 9568273, 6, 0, 9568276, 9, 0, 9568277, 22, 0, 9568280, 14, 0, 9633804, 29, 0, 9633809, 21, 0, 9633811, 11, 0, 9633812, 16, 0, 9699347, 7, 0, 9764896, 11, 0, 9764897, 12, 0, 9830428, 5, 0, 9830429, 6, 0, 9830435, 5, 0, 9830436, 19, 0, 9895964, 7, 0, 9895972, 17, 0, 9895973, 15, 0, 9961509, 17, 0, 9961510, 15, 0, 10027017, 22, 0, 10027046, 17, 0, 10092551, 11, 0, 10092552, 16, 0, 10158088, 8, 0, 10223621, 13, 0, 10551330, 19, 0, 10551331, 12, 0, 10616866, 16, 0, 10879009, 15, 0, 10879010, 12, 0, 10944545, 16, 0, 11075589, 25, 0, 11141128, 23, 0, 11206660, 15, 0, 11206661, 12, 0, 11272196, 16, 0, 11337736, 11, 0, 11337737, 15, 0, 11403273, 10, 0, 11599904, 5, 0, 11599905, 25, 0, 11665424, 5, 0, 11665425, 6, 0, 11665441, 8, 0, 11927586, 5, 0, 11927587, 25, 0, 11993122, 20, 0, 12058627, 13, 0, 12255247, 29, 0, 12386312, 6, 0, 12451847, 7, 0, 12451848, 39, 0, 12582916, 9, 0, 12582920, 11, 0, 12582921, 15, 0, 12582934, 15, 0, 12582935, 12, 0, 12582938, 11, 0, 12582939, 18, 0, 12582946, 19, 0, 12582947, 12, 0, 12648452, 10, 0, 12648453, 8, 0, 12648457, 10, 0, 12648470, 10, 0, 12648475, 10, 0, 12648482, 10, 0, 13041664, 15, 0, 13041665, 12, 0, 13041671, 13, 0, 13107200, 16, 0, 13238280, 18, 0, 13238281, 6, 0, 13238298, 19, 0, 13238299, 12, 0, 13303816, 10, 0, 13303834, 16, 0, 13434882, 11, 0, 13434883, 12, 0, 13500419, 39, 0, 13631491, 11, 0, 13631492, 12, 0, 13631512, 11, 0, 13631513, 15, 0, 13697028, 21, 0, 13697032, 11, 0, 13697033, 38, 0, 13697049, 17, 0, 13697050, 15, 0, 13762568, 20, 0, 13762586, 17, 0, 13762587, 18, 0, 13828123, 17, 0, 13828124, 18, 0, 13893660, 17, 0, 13893661, 18, 0, 13959197, 17, 0, 13959198, 18, 0, 14024734, 17, 0, 14024735, 18, 0, 14090271, 17, 0, 14090272, 18, 0, 14155779, 23, 0, 14155780, 6, 0, 14155783, 23, 0, 14155784, 6, 0, 14155808, 17, 0, 14155809, 16, 0, 14221316, 21, 0, 14221320, 27, 0, 14811158, 5, 0, 14811159, 19, 0, 14811160, 18, 0, 14811161, 6, 0, 14876695, 10, 0, 14876696, 10, 0, 15269895, 5, 0, 15269896, 6, 0, 15335432, 27, 0, 15335445, 11, 0, 15335446, 15, 0, 15400982, 17, 0, 15400983, 12, 0, 15400987, 15, 0, 15400988, 12, 0, 15466519, 8, 0, 15466523, 10, 0, 15990810, 15, 0, 15990811, 12, 0, 16056346, 10, 0, 16056352, 6, 0, 16121887, 11, 0, 16121888, 12, 0, 16187423, 11, 0, 16187424, 12, 0, 16252960, 21, 0, 16252964, 11, 0, 16252965, 15, 0, 16318501, 17, 0, 16384028, 9, 0, 16384037, 11, 0, 16384038, 15, 0, 16449564, 10, 0, 16449565, 8, 0, 16449574, 17, 0, 16515086, 13, 0, 16515104, 11, 0, 16515105, 12, 0, 16580641, 21, 0, 16777249, 25, 0, 16842784, 11, 0, 16842785, 12, 0, 16908320, 19, 0, 16973856, 10, 0, 16973857, 21, 0, 17104901, 6, 0, 17170436, 26, 0, 17170437, 8, 0, 17236004, 13, 0, 17301520, 5, 0, 17301521, 6, 0, 17367056, 7, 0, 17432583, 11, 0, 17432584, 12, 0, 17498119, 7, 0, 17563648, 18, 0, 17629184, 15, 0, 17629185, 12, 0, 17629212, 5, 0, 17629213, 6, 0, 17760260, 13, 0, 17825793, 18, 0, 17825799, 5, 0, 17825800, 9, 0, 17891329, 10, 0, 17891330, 8, 0, 17891336, 17, 0, 18022408, 11, 0, 18022409, 12, 0, 18087945, 8, 0, 18350114, 11, 0, 18350115, 12, 0, 18415651, 21, 0, 18743316, 11, 0, 18743317, 15, 0, 18808853, 10, 0, 18874369, 38, 0, 19202065, 13, 0, 19660822, 11, 0, 19660823, 15, 0, 19726359, 17, 0, 19922949, 23, 0, 19922950, 6, 0, 19922954, 9, 0, 19922956, 9, 0, 19988486, 27, 0, 19988489, 20, 0, 19988490, 10, 0, 19988492, 10, 0, 19988493, 39, 0, 19988494, 9, 0, 19988496, 19, 0, 19988497, 12, 0, 19988500, 13, 0, 20054030, 17, 0, 20054031, 15, 0, 20119567, 17, 0, 20119568, 15, 0, 20119574, 18, 0, 20119575, 22, 0, 20185104, 17, 0, 20185108, 11, 0, 20185109, 16, 0, 20185110, 10, 0, 20250644, 26, 0, 20381712, 11, 0, 20381713, 12, 0, 20447249, 21, 0, 20578305, 22, 0, 20643857, 13, 0, 20971540, 11, 0, 20971541, 12, 0, 21102599, 13, 0, 21102612, 11, 0, 21102613, 12, 0, 21233671, 13, 0, 21757959, 13, 0, 21954567, 13, 0, 22151169, 15, 0, 22151170, 38, 0, 22216705, 16, 0, 22216728, 13, 0, 22282264, 25, 0, 22282271, 11, 0, 22282272, 12, 0, 22347799, 11, 0, 22347800, 12, 0 )
+
+[node name="Easteregg2" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.490196 )
+position = Vector2( 31.9998, 5315 )
+rotation = -0.363028
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 35 )
+
+[node name="Easteregg3" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.431373 )
+position = Vector2( 559, 4612 )
+rotation = -2.29511
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 34 )
+
+[node name="Easteregg4" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.658824 )
+position = Vector2( 517, 3220 )
+rotation = 0.785398
+scale = Vector2( 0.2, 0.2 )
+texture = SubResource( 356 )
+
+[node name="Easteregg5" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.545098 )
+position = Vector2( 77, 2468 )
+rotation = 1.45037
+scale = Vector2( 0.1, 0.1 )
+texture = SubResource( 357 )
 
 [node name="Plants" type="TileMap" parent="."]
 tile_set = SubResource( 345 )
@@ -3669,6 +3907,23 @@ text = "Falls: 0"
 align = 1
 valign = 1
 
+[node name="Cheater" type="Label" parent="CanvasLayer/GameFinished"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -154.0
+margin_top = 105.0
+margin_right = 76.0
+margin_bottom = 169.0
+rect_rotation = -17.8
+rect_scale = Vector2( 1.5, 1.5 )
+custom_colors/font_color = Color( 0.913725, 0.0941176, 0.0941176, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 349 )
+text = "CHEATER!"
+align = 1
+valign = 1
+
 [node name="Menu" type="Button" parent="CanvasLayer/GameFinished"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -3830,6 +4085,7 @@ rect_scale = Vector2( 0.7, 0.7 )
 custom_fonts/font = SubResource( 346 )
 text = "[Long jump]"
 
+[connection signal="body_entered" from="Easteregg" to="Easteregg" method="_on_Easteregg_body_entered"]
 [connection signal="pressed" from="CanvasLayer/GameFinished/Menu" to="CanvasLayer/GameFinished" method="_on_Menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/Pause/Resume" to="CanvasLayer/Pause" method="_on_Resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/Pause/Menu" to="CanvasLayer/Pause" method="_on_Menu_pressed"]
