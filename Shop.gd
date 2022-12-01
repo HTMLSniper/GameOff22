@@ -134,7 +134,7 @@ func _on_Button_diver_pressed():
 		change_button_color()
 	else: 
 		if Global.settings["coins"] >= cost_diver:
-			Global.settings["coins"] = Global.settings["coins"] - cost_diver
+			Global.change_coins(Global.settings["coins"] - cost_diver)
 			Global.sprite_texture = diver
 			Global.player.change_sprite(diver)
 			$Moneycoin/Moneylabel.text = String(Global.settings["coins"])
@@ -153,7 +153,7 @@ func _on_Button_amongo_pressed():
 		change_button_color()
 	else:
 		if Global.settings["coins"] >= cost_amongo:
-			Global.settings["coins"] = Global.settings["coins"] - cost_amongo
+			Global.change_coins(Global.settings["coins"] - cost_amongo)
 			Global.sprite_texture = amongusfinalskin
 			Global.player.change_sprite(amongusfinalskin)
 			$Moneycoin/Moneylabel.text = String(Global.settings["coins"])
@@ -181,7 +181,7 @@ func _on_Button_princess_bombo_pressed():
 			change_button_color()
 	else:
 		if Global.settings["coins"] >= cost_princess:
-			Global.settings["coins"] = Global.settings["coins"] - cost_princess
+			Global.change_coins(Global.settings["coins"] - cost_princess)
 			Global.sprite_texture = princess_crown
 			Global.player.change_sprite(princess_crown)
 			$Moneycoin/Moneylabel.text = String(Global.settings["coins"])
@@ -200,7 +200,7 @@ func _on_Button_bombo_mario_pressed():
 			change_button_color()
 	else:
 		if Global.settings["coins"] >= cost_mario:
-			Global.settings["coins"] = Global.settings["coins"] - cost_mario
+			Global.change_coins(Global.settings["coins"] - cost_mario)
 			Global.sprite_texture = bombo_mario
 			Global.player.change_sprite(bombo_mario)
 			$Moneycoin/Moneylabel.text = String(Global.settings["coins"])

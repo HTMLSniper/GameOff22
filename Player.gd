@@ -373,7 +373,7 @@ func connect_goal():
 	goal.connect("goal_entered", self, "won")
 
 func get_coin():
-	Global.settings["coins"] = Global.settings["coins"] + 1
+	Global.change_coins(Global.settings["coins"] + 1)
 	print(Global.settings["coins"])
 
 func change_sprite(path):

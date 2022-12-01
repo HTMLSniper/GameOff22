@@ -15,7 +15,8 @@ func _ready() -> void:
 		queue_free()
 
 func _on_Coin_body_entered(body: Node) -> void:
-	if body.has_method("get_coin"):
+	if body.has_method("get_coin") and not collected:
+		collected = true
 		pickup_sound.pitch_scale = rand_range(0.8,1.2)
 		animation.play("coin_found")
 		body.get_coin()

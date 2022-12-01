@@ -5,6 +5,7 @@ const SKIN_FILE_NAME = "user://skinsavedata.save"
 
 signal music_changed_live
 signal sound_changed_live
+signal coins_changed_live
 
 var bombo = preload("res://assets/bombo.png")
 
@@ -78,6 +79,9 @@ func load_from_file():
 		sound_on = save_data.get_var()
 		save_data.close() 
 
+func change_coins(new_number):
+	settings["coins"] = new_number
+	emit_signal("coins_changed_live")
 
 func reset_everything():
 	player.position.x = 286
