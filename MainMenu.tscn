@@ -1072,6 +1072,45 @@ custom_styles/pressed = ExtResource( 6 )
 custom_styles/normal = ExtResource( 7 )
 text = "Quit"
 
+[node name="Animals" type="Node" parent="."]
+
+[node name="Crabby" parent="Animals" instance=ExtResource( 19 )]
+position = Vector2( 391, 256 )
+lightintensity_circle = 0.3
+
+[node name="Crabby2" parent="Animals" instance=ExtResource( 19 )]
+position = Vector2( 257, 128 )
+lightintensity_circle = 0.3
+
+[node name="Fish" parent="Animals" instance=ExtResource( 20 )]
+position = Vector2( 120, 234 )
+
+[node name="Fish2" parent="Animals" instance=ExtResource( 20 )]
+position = Vector2( 79, 225 )
+
+[node name="Fish3" parent="Animals" instance=ExtResource( 20 )]
+position = Vector2( 217, 224 )
+
+[node name="Jelly" parent="Animals" instance=ExtResource( 21 )]
+position = Vector2( 519, 131 )
+lightintensity_circle = 0.3
+
+[node name="Jelly2" parent="Animals" instance=ExtResource( 21 )]
+position = Vector2( 529, 122 )
+lightintensity_circle = 0.3
+
+[node name="Jelly3" parent="Animals" instance=ExtResource( 21 )]
+position = Vector2( 502, 142 )
+lightintensity_circle = 0.3
+
+[node name="Octupus" parent="Animals" instance=ExtResource( 18 )]
+position = Vector2( 312, 98 )
+lightintensity_circle = 0.3
+
+[node name="Octupus2" parent="Animals" instance=ExtResource( 18 )]
+position = Vector2( 507, 304 )
+lightintensity_circle = 0.3
+
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 110, 267 )
 lightintensity_cone = 0.3
@@ -1219,38 +1258,6 @@ custom_styles/pressed = ExtResource( 6 )
 custom_styles/normal = ExtResource( 7 )
 enabled_focus_mode = 0
 text = "Restart"
-
-[node name="Animals" type="Node" parent="."]
-
-[node name="Crabby" parent="Animals" instance=ExtResource( 19 )]
-position = Vector2( 391, 256 )
-
-[node name="Crabby2" parent="Animals" instance=ExtResource( 19 )]
-position = Vector2( 257, 128 )
-
-[node name="Fish" parent="Animals" instance=ExtResource( 20 )]
-position = Vector2( 120, 234 )
-
-[node name="Fish2" parent="Animals" instance=ExtResource( 20 )]
-position = Vector2( 79, 225 )
-
-[node name="Fish3" parent="Animals" instance=ExtResource( 20 )]
-position = Vector2( 217, 224 )
-
-[node name="Jelly" parent="Animals" instance=ExtResource( 21 )]
-position = Vector2( 519, 131 )
-
-[node name="Jelly2" parent="Animals" instance=ExtResource( 21 )]
-position = Vector2( 529, 122 )
-
-[node name="Jelly3" parent="Animals" instance=ExtResource( 21 )]
-position = Vector2( 502, 142 )
-
-[node name="Octupus" parent="Animals" instance=ExtResource( 18 )]
-position = Vector2( 312, 98 )
-
-[node name="Octupus2" parent="Animals" instance=ExtResource( 18 )]
-position = Vector2( 507, 304 )
 
 [connection signal="pressed" from="Shop" to="." method="_on_Shop_pressed"]
 [connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]

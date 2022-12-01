@@ -1015,81 +1015,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 0, 16, 0, 16 )
 [sub_resource type="DynamicFont" id=126]
 font_data = ExtResource( 1 )
 
-[sub_resource type="Environment" id=127]
-background_mode = 4
-fog_color = Color( 0.423529, 0.584314, 0.768627, 1 )
-fog_depth_begin = 0.0
-tonemap_exposure = 0.7
-glow_enabled = true
-glow_levels/1 = true
-glow_levels/2 = true
-glow_levels/4 = true
-glow_levels/5 = false
-glow_intensity = 0.1
-glow_strength = 0.63
-glow_bloom = 0.15
-glow_blend_mode = 0
-glow_hdr_luminance_cap = 3.0
-glow_bicubic_upscale = true
-adjustment_enabled = true
-adjustment_contrast = 1.08
-adjustment_saturation = 1.08
-
-[sub_resource type="Shader" id=71]
-code = "shader_type canvas_item;
-
-uniform vec4 blue_tint : hint_color;
-uniform float color_mix : hint_range(0.0, 1.0, 0.05);
-uniform vec2 sprite_scale;
-
-float rand(vec2 coord){
-	return fract(sin(dot(coord, vec2(12.9898, 78.233)))* 43758.5453123); //random number
-}
-
-float noise(vec2 coord){
-	vec2 i = floor(coord);
-	vec2 f = fract(coord);
-	
-	// 4 corners of rect surrounding the point
-	float a = rand(i);
-	float b = rand(i + vec2(1.0, 0.0));
-	float c = rand(i + vec2(0.0, 1.0));
-	float d = rand(i + vec2(1.0, 1.0));
-	
-	vec2 cubic = f*f*(3.0-2.0*f);
-	return mix(a,b,cubic.x)+(c-a)* cubic.y*(1.0-cubic.x)+(d-b)*cubic.x*cubic.y; // noise texture
-}
-
-void fragment(){
-	
-	vec2 noisecoord1 = UV * sprite_scale; // make the texture smaller
-	vec2 noisecoord2 = UV * sprite_scale + 4.0; // + offset
-	vec2 noisecoord3 = UV * sprite_scale - 3.0; // + offset
-	
-	vec2 motion1 = vec2(TIME *0.3, TIME*-0.4);
-	vec2 motion2 = vec2(TIME *0.1, TIME*0.5);
-	vec2 motion3 = vec2(TIME *-0.1, TIME*0.1);
-	
-	vec2 distort1 = vec2(noise(noisecoord1 + motion1), noise(noisecoord2 + motion1)) - vec2(0.5);
-	vec2 distort2 = vec2(noise(noisecoord1 + motion2), noise(noisecoord2 + motion2)) - vec2(0.5);
-	vec2 distort3 = vec2(noise(noisecoord3 + motion3), noise(noisecoord3 + motion3)) - vec2(0.5);
-	
-	vec2 distort_sum = (distort1 + distort2 + distort3) / 200.0; // make the distortion smaller
-	
-	vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV + distort_sum, 0.0); //0.0 for level of blur
-	
-	color = mix(color,blue_tint, color_mix); // add tint
-	color.rgb = mix(vec3(0.5), color.rgb, 1.4); // add contrast, vec3(0.5) = gray, 1.4 = more than 1 add light
-	
-	COLOR = color;
-}"
-
-[sub_resource type="ShaderMaterial" id=128]
-shader = SubResource( 71 )
-shader_param/blue_tint = Color( 0.439216, 0.588235, 0.67451, 1 )
-shader_param/color_mix = 0.2
-shader_param/sprite_scale = Vector2( 10.531, 6.375 )
-
 [sub_resource type="AtlasTexture" id=150]
 atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 16, 16 )
@@ -1238,6 +1163,81 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="Environment" id=127]
+background_mode = 4
+fog_color = Color( 0.423529, 0.584314, 0.768627, 1 )
+fog_depth_begin = 0.0
+tonemap_exposure = 0.7
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/4 = true
+glow_levels/5 = false
+glow_intensity = 0.1
+glow_strength = 0.63
+glow_bloom = 0.15
+glow_blend_mode = 0
+glow_hdr_luminance_cap = 3.0
+glow_bicubic_upscale = true
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.08
+
+[sub_resource type="Shader" id=71]
+code = "shader_type canvas_item;
+
+uniform vec4 blue_tint : hint_color;
+uniform float color_mix : hint_range(0.0, 1.0, 0.05);
+uniform vec2 sprite_scale;
+
+float rand(vec2 coord){
+	return fract(sin(dot(coord, vec2(12.9898, 78.233)))* 43758.5453123); //random number
+}
+
+float noise(vec2 coord){
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
+	
+	// 4 corners of rect surrounding the point
+	float a = rand(i);
+	float b = rand(i + vec2(1.0, 0.0));
+	float c = rand(i + vec2(0.0, 1.0));
+	float d = rand(i + vec2(1.0, 1.0));
+	
+	vec2 cubic = f*f*(3.0-2.0*f);
+	return mix(a,b,cubic.x)+(c-a)* cubic.y*(1.0-cubic.x)+(d-b)*cubic.x*cubic.y; // noise texture
+}
+
+void fragment(){
+	
+	vec2 noisecoord1 = UV * sprite_scale; // make the texture smaller
+	vec2 noisecoord2 = UV * sprite_scale + 4.0; // + offset
+	vec2 noisecoord3 = UV * sprite_scale - 3.0; // + offset
+	
+	vec2 motion1 = vec2(TIME *0.3, TIME*-0.4);
+	vec2 motion2 = vec2(TIME *0.1, TIME*0.5);
+	vec2 motion3 = vec2(TIME *-0.1, TIME*0.1);
+	
+	vec2 distort1 = vec2(noise(noisecoord1 + motion1), noise(noisecoord2 + motion1)) - vec2(0.5);
+	vec2 distort2 = vec2(noise(noisecoord1 + motion2), noise(noisecoord2 + motion2)) - vec2(0.5);
+	vec2 distort3 = vec2(noise(noisecoord3 + motion3), noise(noisecoord3 + motion3)) - vec2(0.5);
+	
+	vec2 distort_sum = (distort1 + distort2 + distort3) / 200.0; // make the distortion smaller
+	
+	vec4 color = textureLod(SCREEN_TEXTURE, SCREEN_UV + distort_sum, 0.0); //0.0 for level of blur
+	
+	color = mix(color,blue_tint, color_mix); // add tint
+	color.rgb = mix(vec3(0.5), color.rgb, 1.4); // add contrast, vec3(0.5) = gray, 1.4 = more than 1 add light
+	
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=128]
+shader = SubResource( 71 )
+shader_param/blue_tint = Color( 0.439216, 0.588235, 0.67451, 1 )
+shader_param/color_mix = 0.2
+shader_param/sprite_scale = Vector2( 10.531, 6.375 )
+
 [node name="Shop" type="Node2D"]
 script = ExtResource( 4 )
 
@@ -1300,32 +1300,40 @@ custom_styles/pressed = ExtResource( 9 )
 custom_styles/normal = ExtResource( 10 )
 text = "Back"
 
+[node name="Animals" type="Node" parent="."]
+
+[node name="Jelly" parent="Animals" instance=ExtResource( 24 )]
+position = Vector2( 580, 271 )
+lightintensity_circle = 0.3
+
+[node name="Jelly2" parent="Animals" instance=ExtResource( 24 )]
+position = Vector2( 589, 273 )
+lightintensity_circle = 0.3
+
+[node name="Fish" parent="Animals" instance=ExtResource( 23 )]
+position = Vector2( 407, 268 )
+
+[node name="Fish2" parent="Animals" instance=ExtResource( 23 )]
+position = Vector2( 470, 258 )
+
+[node name="Crabby" parent="Animals" instance=ExtResource( 22 )]
+position = Vector2( 263, 304 )
+lightintensity_circle = 0.3
+
+[node name="Octupus" parent="Animals" instance=ExtResource( 21 )]
+position = Vector2( 173, 305 )
+lightintensity_circle = 0.3
+
 [node name="Player" parent="." instance=ExtResource( 7 )]
 position = Vector2( 107, 272 )
 scale = Vector2( 2, 2 )
 lightintensity_cone = 0.3
 lightintensity_circle = 0.2
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 320, 183 )
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 127 )
-
-[node name="Water" type="Sprite" parent="."]
-material = SubResource( 128 )
-position = Vector2( -19, -17 )
-scale = Vector2( 10.5313, 6.375 )
-texture = ExtResource( 6 )
-centered = false
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-
 [node name="Moneycoin" type="AnimatedSprite" parent="."]
 position = Vector2( 248, 331 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 153 )
-frame = 2
 playing = true
 
 [node name="Moneylabel" type="Label" parent="Moneycoin"]
@@ -1340,7 +1348,7 @@ text = "0"
 position = Vector2( 88, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 144 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="Button_crown" type="Button" parent="crown"]
@@ -1360,7 +1368,7 @@ flat = true
 position = Vector2( 320, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 133 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="Button_diver" type="Button" parent="Diver"]
@@ -1380,7 +1388,7 @@ flat = true
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="Costdiver" type="Label" parent="Diver/Coin"]
@@ -1396,6 +1404,7 @@ text = "5"
 position = Vector2( 200, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 149 )
+frame = 2
 playing = true
 
 [node name="Button_princess_bombo" type="Button" parent="Princess as bombo"]
@@ -1417,6 +1426,7 @@ icon_align = 1
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
+frame = 1
 playing = true
 
 [node name="Costprincess" type="Label" parent="Princess as bombo/Coin"]
@@ -1432,7 +1442,7 @@ text = "5"
 position = Vector2( 552, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 159 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="Button_bombo_mario" type="Button" parent="bombo_mario"]
@@ -1452,7 +1462,6 @@ flat = true
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
-frame = 2
 playing = true
 
 [node name="Costbombo_mario" type="Label" parent="bombo_mario/Coin"]
@@ -1468,6 +1477,7 @@ text = "5"
 position = Vector2( 440, 152 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 139 )
+frame = 2
 playing = true
 
 [node name="Button_amongo" type="Button" parent="amongo"]
@@ -1487,6 +1497,7 @@ flat = true
 position = Vector2( -1, -10.5 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 153 )
+frame = 1
 playing = true
 
 [node name="Costamongo" type="Label" parent="amongo/Coin"]
@@ -1498,25 +1509,20 @@ rect_scale = Vector2( 0.9, 0.9 )
 custom_fonts/font = SubResource( 154 )
 text = "5"
 
-[node name="Animals" type="Node" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 320, 183 )
 
-[node name="Jelly" parent="Animals" instance=ExtResource( 24 )]
-position = Vector2( 580, 271 )
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 127 )
 
-[node name="Jelly2" parent="Animals" instance=ExtResource( 24 )]
-position = Vector2( 589, 273 )
+[node name="Water" type="Sprite" parent="."]
+material = SubResource( 128 )
+position = Vector2( -19, -17 )
+scale = Vector2( 10.5313, 6.375 )
+texture = ExtResource( 6 )
+centered = false
 
-[node name="Fish" parent="Animals" instance=ExtResource( 23 )]
-position = Vector2( 407, 268 )
-
-[node name="Fish2" parent="Animals" instance=ExtResource( 23 )]
-position = Vector2( 470, 258 )
-
-[node name="Crabby" parent="Animals" instance=ExtResource( 22 )]
-position = Vector2( 263, 304 )
-
-[node name="Octupus" parent="Animals" instance=ExtResource( 21 )]
-position = Vector2( 173, 305 )
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [connection signal="pressed" from="Use_default_skin" to="." method="_on_Use_default_skin_pressed"]
 [connection signal="pressed" from="Go Back" to="." method="_on_Go_Back_pressed"]
