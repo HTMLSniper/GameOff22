@@ -8,10 +8,17 @@ onready var shadow_left = $Path2D/PathFollow2D/AnimatedSprite/Left_LightOccluder
 
 var inc = 0
 var speed = 25
+var min_scale_factor = 16
+var scale_factor = 2.5
+var max_scale_factor = 33 # int
 
 func _ready() -> void:
 	sprite.play("move")
 	inc = rand_range(0,1300)
+	follow.offset = inc
+	scale_factor = rand_range(min_scale_factor,max_scale_factor) / 10
+	sprite.scale.x = scale_factor
+	sprite.scale.y = scale_factor
 
 func _process(delta: float) -> void:
 	sprite.play("move")
