@@ -52,20 +52,19 @@ onready var spotlight = $Spotlight
 onready var circle_light = $CircleLight
 onready var landingPart = $LandingParticles
 onready var dashPart = $Sprite/DashParticles
-onready var dashSound
-onready var landingSound
-onready var fallingSound
-onready var bounceSound
-onready var lyingSound
+onready var landingSound = $Audio/AudioStreamLanding
+onready var fallingSound = $Audio/AudioStreamFalling
+onready var bounceSound = $Audio/AudioStreamBounce
+onready var lyingSound = $Audio/AudioStreamLying
+onready var jumpSound = $Audio/AudioStreamJump
 
 func _ready() -> void:
-	#animation.play("Idle_Left")
 	Global.reg_player(self)
 	spotlight.energy = lightintensity_cone
 	circle_light.energy = lightintensity_circle
 	change_sprite(Global.sprite_texture)
 	Global.connect("sound_changed_live", self, "sound_changed")
-	#sound_changed()
+	sound_changed()
 
 func _physics_process(delta: float) -> void:
 	handle_Backpack()
@@ -101,6 +100,9 @@ func idle_state(delta):
 		animation.play("Idle_Right")
 	if Input.is_action_pressed("jump"):
 		state = JUMPING
+		jumpSound.pitch_scale = rand_range(0.8,1.2)
+		sound_changed()
+		jumpSound.play()
 	velocity = reduce_vel(delta, velocity)
 	turn_spotlight()
 	last_vel = velocity
@@ -157,6 +159,9 @@ func falling_state(delta):
 	animation.play("Falling")
 	if Input.is_action_pressed("jump") and jumps_made < max_jumps:
 		state = JUMPING
+		jumpSound.pitch_scale = rand_range(0.8,1.2)
+		sound_changed()
+		jumpSound.play()
 	last_vel = velocity
 	velocity = move_and_slide(velocity, UP_DIRECTION, false)
 
@@ -172,11 +177,17 @@ func flying_state(delta):
 		animation.play("Idle_Right")
 	if Input.is_action_pressed("jump") and jumps_made < max_jumps:
 		state = JUMPING
+		jumpSound.pitch_scale = rand_range(0.8,1.2)
+		sound_changed()
+		jumpSound.play()
 	if position.y < dash_start_point.y - 20:
 		dash_start_point = Vector2.ZERO
 		falling = true
 		Global.falls += 1
 		state = FALLING
+		fallingSound.pitch_scale = rand_range(0.5,1.2)
+		sound_changed()
+		fallingSound.play()
 	last_vel = velocity
 	velocity = move_and_slide(velocity, UP_DIRECTION, false)
 	
@@ -264,11 +275,16 @@ func reduce_vel(delta, vel):
 	vel.y = vel.y - get_gravity(vel) * delta # do gravity always
 	if is_on_floor():
 		if is_slope():
-			pass
+			bounceSound.pitch_scale = rand_range(0.8,1.2)
+			sound_changed()
+			bounceSound.play()
 		elif state == FALLING:
 			vel.x = 0
 			is_jumping = false
 			state = LYING
+			lyingSound.pitch_scale = rand_range(0.8,1.2)
+			sound_changed()
+			lyingSound.play()
 			sprite.rotation = 0
 			lying = true
 			Shake.shake_cam(0.5,0.2)
@@ -278,14 +294,18 @@ func reduce_vel(delta, vel):
 			vel.x = 0
 			is_jumping = false
 			state = IDLE
-			#backpackTimer.start()
+			landingSound.pitch_scale = rand_range(0.8,1.2)
+			sound_changed()
+			landingSound.play()
 			floor_particles(10,0.2)
 		elif state == JUMPING:
 			animation.stop()
 			vel.x = 0
 			is_jumping = false
-			#backpackTimer.start()
 	elif is_on_wall():
+		bounceSound.pitch_scale = rand_range(0.8,1.2)
+		sound_changed()
+		bounceSound.play()
 		vel.x = -last_vel.x * 0.75
 		vel.y *= 1.1
 		if vel.x < last_vel.x:
@@ -373,7 +393,7 @@ func connect_goal():
 	goal.connect("goal_entered", self, "won")
 
 func get_coin():
-	Global.settings["coins"] = Global.settings["coins"] + 1
+	Global.change_coins(Global.settings["coins"] + 1)
 	print(Global.settings["coins"])
 
 func change_sprite(path):
@@ -381,22 +401,22 @@ func change_sprite(path):
 
 func sound_changed():
 	if Global.sound_on:
-		dashSound.volume_db = Global.sound_vol - 10
 		landingSound.volume_db = Global.sound_vol - 10
 		fallingSound.volume_db = Global.sound_vol - 10
 		bounceSound.volume_db = Global.sound_vol - 10
-		lyingSound.volume_db = Global.sound_vol - 10
+		lyingSound.volume_db = Global.sound_vol - 15
+		jumpSound.volume_db = Global.sound_vol - 15
 	else:
-		dashSound.volume_db = -80
 		landingSound.volume_db = -80
 		fallingSound.volume_db = -80
 		bounceSound.volume_db = -80
 		lyingSound.volume_db = -80
-		dashSound.stop()
+		jumpSound.volume_db = -80
 		landingSound.stop()
 		fallingSound.stop()
 		bounceSound.stop()
 		lyingSound.stop()
+		jumpSound.stop()
 
 func _on_LyingTimer_timeout() -> void:
 	lying = false

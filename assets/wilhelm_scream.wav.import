@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/wilhelm_scream.wav-a2c5fe8b5d966de1c5c95e5f4b529014.sample"
+
+[deps]
+
+source_file="res://assets/wilhelm_scream.wav"
+dest_files=[ "res://.import/wilhelm_scream.wav-a2c5fe8b5d966de1c5c95e5f4b529014.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

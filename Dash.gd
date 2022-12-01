@@ -2,11 +2,17 @@ extends Node2D
 
 onready var timer = $Timer
 onready var ghostTimer = $GhostTimer
+onready var dashSound = $AudioStreamPlayer
+
 var ghost_scene = preload("res://DashGhost.tscn")
+
 var stopped = false
 var sprite
 
 func start_dash(sprite_dh, dur):
+	dashSound.pitch_scale = rand_range(0.7,1.5)
+	sound_changed()
+	dashSound.play()
 	self.sprite = sprite_dh
 	timer.wait_time = dur
 	timer.start()
@@ -33,7 +39,12 @@ func instance_ghost():
 	ghost.rotation = sprite.rotation
 	
 	ghost.frame = sprite.frame
-	
+
+func sound_changed():
+	if Global.sound_on:
+		dashSound.volume_db = Global.sound_vol - 10
+	else:
+		dashSound.volume_db = -80
 
 func _on_Timer_timeout() -> void:
 	stopped = true
