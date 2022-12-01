@@ -91,6 +91,7 @@ rotation = 0.729548
 scale = Vector2( 2.5, 2.5 )
 frames = SubResource( 17 )
 animation = "move"
+frame = 2
 playing = true
 offset = Vector2( 0, -15 )
 

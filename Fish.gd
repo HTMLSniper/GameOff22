@@ -8,9 +8,9 @@ onready var shadow_left = $Path2D/PathFollow2D/AnimatedSprite/Left_LightOccluder
 
 var inc = 0
 var speed = 25
-var min_scale_factor = 14
+var min_scale_factor = 13
 var scale_factor = 2.5
-var max_scale_factor = 33 # int
+var max_scale_factor = 32 # int
 
 func _ready() -> void:
 	sprite.play("move right")
