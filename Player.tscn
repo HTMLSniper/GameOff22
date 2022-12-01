@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/backpack_fullness.png" type="Texture" id=2]
@@ -18,6 +18,11 @@
 [ext_resource path="res://ChromAberrMat.tres" type="Material" id=16]
 [ext_resource path="res://assets/EquipmentPro.ttf" type="DynamicFontData" id=17]
 [ext_resource path="res://assets/textfield.png" type="Texture" id=18]
+[ext_resource path="res://assets/wilhelm_scream_short.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/lying_sound.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/jump_sound.wav" type="AudioStream" id=21]
+[ext_resource path="res://assets/bounce_sound.wav" type="AudioStream" id=22]
+[ext_resource path="res://assets/landing_sound.wav" type="AudioStream" id=23]
 
 [sub_resource type="Gradient" id=11]
 interpolation_mode = 2
@@ -868,6 +873,28 @@ valign = 1
 [node name="TimerBackpack" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="AudioStreamLanding" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 23 )
+
+[node name="AudioStreamFalling" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 19 )
+volume_db = -9.811
+pitch_scale = 0.58
+
+[node name="AudioStreamBounce" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 22 )
+
+[node name="AudioStreamLying" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 20 )
+volume_db = -15.208
+
+[node name="AudioStreamJump" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 21 )
+volume_db = -15.208
+pitch_scale = 1.2
 
 [connection signal="timeout" from="LyingTimer" to="." method="_on_LyingTimer_timeout"]
 [connection signal="timeout" from="TimerBackpack" to="." method="_on_TimerBackpack_timeout"]
